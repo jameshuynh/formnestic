@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'bundler'
+require 'rspec/core/rake_task'
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -17,35 +18,25 @@ Jeweler::Tasks.new do |gem|
   gem.name = "formnestic"
   gem.homepage = "http://github.com/jameshuynh/formnestic"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{An extension of formtastic form builder gem}
+  gem.description = %Q{An extension of formtastic form builder gem to aids in building nested or association form}
   gem.email = "james@rubify.com"
   gem.authors = ["James"]
   # dependencies defined in Gemfile
 end
-Jeweler::RubygemsDotOrgTasks.new
+# Jeweler::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
+desc 'Test the formtastic plugin.'
+RSpec::Core::RakeTask.new('spec') do |t|
+  t.pattern = FileList['spec/**/*_spec.rb']
 end
 
-desc "Code coverage detail"
-task :simplecov do
-  ENV['COVERAGE'] = "true"
-  Rake::Task['test'].execute
+desc 'Test the formtastic inputs.'
+RSpec::Core::RakeTask.new('spec:inputs') do |t|
+  t.pattern = FileList['spec/inputs/*_spec.rb']
 end
 
-task :default => :test
-
-require 'rdoc/task'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "formnestic #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+desc 'Test the formtastic plugin with specdoc formatting and colors'
+RSpec::Core::RakeTask.new('specdoc') do |t|
+  t.pattern = FileList['spec/**/*_spec.rb']
 end
