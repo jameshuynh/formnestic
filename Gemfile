@@ -14,7 +14,10 @@ group :development do
   gem 'ammeter', '0.2.2'
   gem 'rspec_tag_matchers', '>= 1.0.0'
   gem 'tzinfo'
+  gem 'spork'
+  gem 'watchr'
 end
 
 gem 'actionpack', "~> 3.0"
-gem 'formtastic', "~> 2.2.1"
+# gem 'formtastic', "~> 2.2.1"
+gem 'formtastic', path: '../formtastic'
