@@ -22,6 +22,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{An extension of formtastic form builder gem to aids in building nested or association form}
   gem.email = "james@rubify.com"
   gem.authors = ["James"]
+  gem.version = File.exist?('VERSION') ? File.read('VERSION') : ""
   # dependencies defined in Gemfile
 end
 # Jeweler::RubygemsDotOrgTasks.new
