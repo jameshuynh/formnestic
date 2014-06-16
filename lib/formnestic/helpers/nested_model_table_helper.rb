@@ -8,7 +8,7 @@ module Formnestic
       def link_to_add_fields_delegate(name, f, association, content, opts={})
         extra_class = opts[:max_entry] == -1 ? "" : (f.object.send(association).count >= opts[:max_entry].to_i ? "hidden" : "")
         min_entry = opts[:min_entry] || -1
-        if f.class == RubifyDashboard::TableFormBuilder
+        if self.options[:display_type] == 'table'
           link_to_function(name, "RubifyJS.add_table_fields(this, \"#{association}\", \"#{escape_javascript(content)}\")", :class => "add-field-link #{extra_class}", "data-max-entry" => opts[:max_entry], "data-min-entry" => min_entry, "data-min-entry-alert" => min_entry != -1 ? opts[:min_entry_alert_message] || I18n.t('rubify_dashboard.there_must_be_at_least_entries', {count: (min_entry), entity_singular: I18n.t("activerecord.models.#{association.to_s.singularize}"), entity_plural: I18n.t("activerecord.models.#{association.to_s.singularize}").pluralize}) : '')
         else
           link_to_function(name, "RubifyJS.add_fields(this, \"#{association}\", \"#{escape_javascript(content)}\")", :class => "add-field-link #{extra_class}", "data-max-entry" => opts[:max_entry], "data-min-entry" => min_entry, "data-min-entry-alert" => min_entry != -1 ? opts[:min_entry_alert_message] || I18n.t('rubify_dashboard.there_must_be_at_least_entries', {count: (min_entry), entity_singular: I18n.t("activerecord.models.#{association.to_s.singularize}"), entity_plural: I18n.t("activerecord.models.#{association.to_s.singularize}").pluralize}) : '')
