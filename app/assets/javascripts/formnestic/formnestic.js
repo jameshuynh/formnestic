@@ -3,7 +3,7 @@ var Formnestic = {
     var newId = new Date().getTime();
     var regexp = new RegExp("new_" + associationName, "g");
     var linkDomjQuery = $(linkDom);
-    linkDomjQuery.parents("tr:first").before(content.replace(regexp, new_id));
+    linkDomjQuery.parents("tr:first").before(content.replace(regexp, newId));
     counter = 0;
     linkDomjQuery.parents("tbody:first").find("tr").each(function() {
       $(this).removeClass("odd even").addClass(counter % 2 === 0 ? "even" : "odd");

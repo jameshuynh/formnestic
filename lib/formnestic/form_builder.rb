@@ -47,7 +47,8 @@ module Formnestic
       
       options[:parent_builder] ||= self
       new_record_form_options[:child_index] = "new_#{record_or_name_or_array}"
-      new_record_form_content = formtastic_semantic_fields_for(record_or_name_or_array, *(duplicate_args << new_record_form_options), &block)
+      new_record_form_content = template.content_tag(:tr,  formtastic_semantic_fields_for(record_or_name_or_array, *(duplicate_args << new_record_form_options), &block))
+      puts new_record_form_content
       link_title = options[:new_record_link_label] || I18n.t("formnestic.labels.add_new_entry")
       template.link_to_function(link_title, \
         "Formnestic.addNewTableEntry(this, \"#{record_or_name_or_array}\", \"#{escape_javascript(new_record_form_content)}\")", \

@@ -29,4 +29,7 @@ module Formnestic
       end
     end    
   end
+  
+  class Engine < Rails::Engine
+  end
 end
