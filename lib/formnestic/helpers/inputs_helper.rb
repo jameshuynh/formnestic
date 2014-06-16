@@ -12,16 +12,16 @@ module Formnestic
           html_options[:name] = title
           
           html_options[:class] = html_options[:class].blank? ? "tr-fieldset" : "#{html_options[:class]} tr-fieldset"
-          contents = []
-          contents.push(self.hidden_field(:_destroy, class: "destroy-input", value: false))
-          contents.push(template.content_tag(:div, '', title: I18n.t("rubify_dashboard.web_actions.delete_entry"), class: "table-minus-button"))
-          if options[:show_delete_button] == true
-            delete_cell = template.content_tag(:td, contents.join.html_safe, class: "minus-button-cell")
+          if options[:row_removable] == true
+            contents = []
+            contents.push(self.hidden_field(:_destroy, class: "destroy-input", value: false))
+            contents.push(template.content_tag(:div, '', title: I18n.t("formnestic.labels.remove_this_entry"), class: "formnestic-table-minus-button"))            
+            row_removing_cell = template.content_tag(:td, contents.join.html_safe, class: "minus-button-cell")
           else
-            delete_cell = ""
+            row_removing_cell = ""
           end
         
-          template.content_tag(:tr, template.capture(&block) + delete_cell, html_options)
+          template.content_tag(:tr, template.capture(&block) + row_removing_cell, html_options)
         else
           formtastic_inputs(*args, &block)
         end    
