@@ -19,6 +19,40 @@ module Formnestic
   Formtastic::Inputs::Base.send(:alias_method, :formtastic_render_label?, :render_label?)
   Formtastic::Inputs::Base.send(:include, Formnestic::Inputs::Base::Labelling)
   
+  Formtastic::Inputs::DateInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
+  Formtastic::Inputs::DatetimeInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
+  Formtastic::Inputs::TimeInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
+  
+  Formtastic::Inputs::DateInput.class_eval do
+    def fragment_label_html(fragment)
+      if self.builder.options[:display_type] == "table"
+        "".html_safe
+      else
+        formtastic_fragment_label_html(fragment)
+      end
+    end
+  end
+  
+  Formtastic::Inputs::DatetimeInput.class_eval do
+    def fragment_label_html(fragment)
+      if self.builder.options[:display_type] == "table"
+        ""
+      else
+        formtastic_fragment_label_html(fragment)
+      end
+    end
+  end
+  
+  Formtastic::Inputs::TimeInput.class_eval do
+    def fragment_label_html(fragment)
+      if self.builder.options[:display_type] == "table"
+        ""
+      else
+        formtastic_fragment_label_html(fragment)
+      end
+    end
+  end  
+  
   Formtastic::FormBuilder.class_eval do
     def semantic_fields_for(record_or_name_or_array, *args, &block)
       options = args.dup.extract_options!
@@ -30,6 +64,9 @@ module Formnestic
     end    
   end
   
-  class Engine < Rails::Engine
+  if defined?(::Rails)
+    class Engine < Rails::Engine
+    end
   end
+  
 end

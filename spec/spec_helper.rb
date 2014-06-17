@@ -114,6 +114,10 @@ Spork.each_run do
       def body
         "sample body"
       end
+      
+      def post_date
+        Date.today
+      end
     end
 
     module ::Namespaced

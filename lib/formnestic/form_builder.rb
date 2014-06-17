@@ -15,7 +15,7 @@ module Formnestic
           
       table_header = formnestic_table_header(options, record_or_name_or_array)
             
-      options[:class] = options[:class].blank? ? "table-inputs nested-model" : "#{html_options[:class]} table-inputs nested-model"
+      options[:class] = options[:class].blank? ? "formnestic-table-inputs formnestic-nested-model" : "#{html_options[:class]} formnestic-table-inputs formnestic-nested-model"
       
       template.content_tag(:table,
         [table_header, template.content_tag(:tbody, Formtastic::Util.html_safe(contents.join))].join.html_safe,
@@ -47,15 +47,18 @@ module Formnestic
       
       options[:parent_builder] ||= self
       new_record_form_options[:child_index] = "new_#{record_or_name_or_array}"
-      new_record_form_content = template.content_tag(:tr,  formtastic_semantic_fields_for(record_or_name_or_array, *(duplicate_args << new_record_form_options), &block))
-      puts new_record_form_content
+      new_record_form_content = formtastic_semantic_fields_for(record_or_name_or_array, *(duplicate_args << new_record_form_options), &block)
       link_title = options[:new_record_link_label] || I18n.t("formnestic.labels.add_new_entry")
       template.link_to_function(link_title, \
         "Formnestic.addNewTableEntry(this, \"#{record_or_name_or_array}\", \"#{escape_javascript(new_record_form_content)}\")", \
           "class" => ["formnestic-add-row-field-link", options[:new_record_link_class]].compact.join(" "), \
           "data-max-entry" => options[:max_entry], \
           "data-min-entry" => min_entry, \
-          "data-min-entry-alert" => min_entry != -1 ? (options[:min_entry_alert_message] || I18n.t('formnestic.labels.there_must_be_at_least_a_number_of_entries', {count: (min_entry), entity_singular: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}"), entity_plural: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}").pluralize})) : '')
+          "data-min-entry-alert" => min_entry != -1 ? (options[:min_entry_alert_message] ||
+             I18n.t('formnestic.labels.there_must_be_at_least_a_number_of_entries', {
+               count: (min_entry), 
+               entity_singular: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}"), 
+               entity_plural: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}").pluralize})) : '')
       
     end
         

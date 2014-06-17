@@ -11,12 +11,12 @@ module Formnestic
           html_options[:class] ||= "inputs"
           html_options[:name] = title
           
-          html_options[:class] = html_options[:class].blank? ? "tr-fieldset" : "#{html_options[:class]} tr-fieldset"
+          html_options[:class] = html_options[:class].blank? ? "formnestic-tr-fieldset" : "#{html_options[:class]} formnestic-tr-fieldset"
           if options[:row_removable] == true
             contents = []
-            contents.push(self.hidden_field(:_destroy, class: "destroy-input", value: false))
-            contents.push(template.content_tag(:div, '', title: I18n.t("formnestic.labels.remove_this_entry"), class: "formnestic-table-minus-button"))            
-            row_removing_cell = template.content_tag(:td, contents.join.html_safe, class: "minus-button-cell")
+            contents.push(self.hidden_field(:_destroy, class: "formnestic-destroy-input", value: false))
+            contents.push(template.content_tag(:div, '', title: I18n.t("formnestic.labels.remove_this_entry"), class: "formnestic-table-minus-button icon-cancel-circled", onclick: 'Formnestic.removeATableEntry(this);'))            
+            row_removing_cell = template.content_tag(:td, contents.join.html_safe, class: "formnestic-minus-button-cell")
           else
             row_removing_cell = ""
           end
