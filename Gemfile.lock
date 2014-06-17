@@ -134,6 +134,7 @@ DEPENDENCIES
   bundler (~> 1.0)
   formtastic!
   jeweler (~> 2.0.1)
+  rake
   rspec-rails (~> 2.8.0)
   rspec_tag_matchers (>= 1.0.0)
   shoulda

@@ -6,7 +6,7 @@ source "http://rubygems.org"
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 
-group :development do
+group :development, :test do
   gem "shoulda", ">= 0"
   gem "bundler", "~> 1.0"
   gem "jeweler", "~> 2.0.1"
@@ -16,6 +16,10 @@ group :development do
   gem 'tzinfo'
   gem 'spork'
   gem 'watchr'
+end
+
+group :test do
+  gem 'rake'
 end
 
 gem 'actionpack', "~> 3.0"
