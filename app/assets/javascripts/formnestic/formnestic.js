@@ -14,8 +14,9 @@ var Formnestic = {
     var table = deleteEntryLinkDom.parents("table:first");
     var addRowLink = table.find("a.formnestic-add-field-link:first");
     var numberOfShowingEntries = Formnestic.getNumberOfShowingEntriesInATable(table) - 1;
-    if (addRowLink.attr("data-min-entry") && parseInt(addRowLink.attr("data-min-entry"), 10) !== -1) {
-      if (number_of_showing_entries <= parseInt(addRowLink.attr("data-min-entry"), 10)) {
+    var minNumberOfEntries = parseInt(table.attr("min_entry"), 10);
+    if (minNumberOfEntries !== -1) {
+      if (number_of_showing_entries <= minNumberOfEntries) {
         alert(addRowLink.attr("data-min-entry-alert"));
         return;
       }//end if
@@ -66,8 +67,9 @@ var Formnestic = {
       .css({display: 'none'})
       .fadeIn(function() {
         _this.addOddAndEvenClassForTable(table);
-        if (linkDomjQuery.attr("data-max-entry") && parseInt($(link).attr("data-max-entry"), 10) !== -1) {
-          if (counter >= parseInt(linkDomjQuery.attr("data-max-entry"), 10)) {
+        var maxNumberOfEntries = parseInt(table.attr('max_entry'), 10);
+        if (maxNumberOfEntries !== -1) {
+          if (counter >= maxNumberOfEntries) {
             return linkDomjQuery.addClass("hidden");
           }//end if
         } else {

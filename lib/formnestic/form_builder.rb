@@ -17,9 +17,17 @@ module Formnestic
             
       options[:class] = options[:class].blank? ? "formnestic-table-inputs formnestic-nested-model" : "#{html_options[:class]} formnestic-table-inputs formnestic-nested-model"
       
+      options[:min_entry] ||= -1
+      options[:max_entry] ||= -1
+      options[:min_entry_alert_message] = options[:min_entry] != -1 ? (options[:min_entry_alert_message] ||
+             I18n.t('formnestic.labels.there_must_be_at_least_a_number_of_entries', {
+               count: (options[:min_entry]), 
+               entity_singular: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}"), 
+               entity_plural: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}").pluralize})) : ''
+               
       template.content_tag(:table,
         [table_header, template.content_tag(:tbody, Formtastic::Util.html_safe(contents.join))].join.html_safe,
-        options.except(:builder, :parent, :name, :parent_builder, :display_type, :row_removable)
+        options.except(:builder, :parent, :name, :parent_builder, :display_type, :row_removable, :new_record_link_label)
       )
     end
     
@@ -40,7 +48,7 @@ module Formnestic
     
     def formnestic_link_to_add_fields_with_content(record_or_name_or_array, *args, &block)
       new_object = self.object.class.reflect_on_association(record_or_name_or_array).klass.new
-      min_entry = options[:min_entry] || -1
+      options = args.dup.extract_options!
       duplicate_args = args.dup
       duplicate_args = duplicate_args.unshift(new_object)
       new_record_form_options = duplicate_args.extract_options!
@@ -51,14 +59,7 @@ module Formnestic
       link_title = options[:new_record_link_label] || I18n.t("formnestic.labels.add_new_entry")
       template.link_to_function(link_title, \
         "Formnestic.addNewTableEntry(this, \"#{record_or_name_or_array}\", \"#{escape_javascript(new_record_form_content)}\")", \
-          "class" => ["formnestic-add-row-field-link", options[:new_record_link_class]].compact.join(" "), \
-          "data-max-entry" => options[:max_entry], \
-          "data-min-entry" => min_entry, \
-          "data-min-entry-alert" => min_entry != -1 ? (options[:min_entry_alert_message] ||
-             I18n.t('formnestic.labels.there_must_be_at_least_a_number_of_entries', {
-               count: (min_entry), 
-               entity_singular: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}"), 
-               entity_plural: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}").pluralize})) : '')
+          "class" => ["formnestic-add-row-field-link", options[:new_record_link_class]].compact.join(" "))
       
     end
         
