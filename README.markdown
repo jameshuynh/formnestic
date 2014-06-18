@@ -20,6 +20,8 @@ gem "formnestic"
 
 ### Usage
 
+Formnestic can be used to build a backend quiz engine in just __less than 40 lines of code__
+
 ```erb
 <div style='width: 550px; margin: 20px auto; '>
   <div class='form-title'>New Quiz Pool</div>
