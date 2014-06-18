@@ -18,6 +18,10 @@ Add Formnestic to your Gemfile and run ``bundle install``:
 gem "formnestic"
 ```
 
+### Features
+
+- Table form 
+
 ### Usage
 
 Formnestic can be used to build a backend quiz engine in just __less than 40 lines of code__
@@ -50,7 +54,7 @@ Formnestic can be used to build a backend quiz engine in just __less than 40 lin
                 new_record_link_label: "+ answer"                
               } do |quiz_pool_option_builder| %>
                 <%= quiz_pool_option_builder.inputs do %>
-                  <%= quiz_pool_option_builder.input :description, as: :string, :hint => "abc" %>
+                  <%= quiz_pool_option_builder.input :description, as: :string, :hint => "e.g. Orange" %>
                   <%= quiz_pool_option_builder.input :is_correct %>
                 <% end %>
               <% end %>
@@ -63,6 +67,12 @@ Formnestic can be used to build a backend quiz engine in just __less than 40 lin
   <% end %>
 </div>
 ```
+
+### Roadmap to version 2.0
+
+- Sortable between nested model entry (including rows in a table)
+- Delegator for alert view
+- Ability to lock an entry
 
 ## Contributing to formnestic
  

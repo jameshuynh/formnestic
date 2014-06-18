@@ -10,6 +10,7 @@ form.formtastic .text textarea {
   border: 1px solid #ccc;
   padding: 5px;
   font-size: 12px;
+  height: 50px;
 }
 
 div.formnestic-nested-model-container fieldset.formnestic-li-fieldset {
@@ -43,6 +44,7 @@ div.formnestic-nested-model-container {
   textarea {
     padding: 5px;
     border: 1px solid #ccc;
+    height: 50px;
   }
     
   div.formnestic-list-new-entry-link-container {
