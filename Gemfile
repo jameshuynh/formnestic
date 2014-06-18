@@ -23,5 +23,5 @@ group :test do
 end
 
 gem 'actionpack', "~> 3.0"
-# gem 'formtastic', "~> 2.2.1"
-gem 'formtastic', path: '../formtastic'
+gem 'formtastic', "~> 2.2.1"
+# gem 'formtastic', path: '../formtastic'
