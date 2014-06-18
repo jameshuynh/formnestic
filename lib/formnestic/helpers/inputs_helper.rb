@@ -34,7 +34,7 @@ module Formnestic
         record_name = self.object.class.to_s.underscore.gsub("_", " ").singularize.downcase
         entity_name = I18n.t("activerecord.models.#{self.object.class.to_s.underscore.downcase}", default: record_name)
         
-        content_div_content = template.content_tag(:span, record_name.capitalize, class: "formnestic-li-fieldset-for") + "&nbsp;".html_safe +  template.content_tag(:span, self.options[:parent_builder].rows_counter, class: "formnestic-li-fieldset-for-order")
+        content_div_content = template.content_tag(:span, record_name.titleize, class: "formnestic-li-fieldset-for") + "&nbsp;#".html_safe +  template.content_tag(:span, self.options[:parent_builder].rows_counter, class: "formnestic-li-fieldset-for-order")
         title_div = template.content_tag(:div, content_div_content, class: "formnestic-li-fieldset-legend")        
         template.content_tag(:fieldset, title_div + row_removing_div + template.capture(&block), html_options)
       end

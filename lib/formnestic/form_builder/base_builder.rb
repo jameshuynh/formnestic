@@ -30,7 +30,7 @@ module Formnestic
         
         template.link_to_function(link_title, \
           "Formnestic.#{javascript_fn_to_call}(this, \"#{record_or_name_or_array}\", \"#{escape_javascript(new_record_form_content)}\")", \
-            "class" => ["formnestic-add-row-field-link", options[:new_record_link_class], (options[:max_entry] != -1 and rows_counter >= options[:max_entry]) ? "hidden" : nil].compact.join(" "))
+            "class" => ["formnestic-add-row-field-link", options[:new_record_link_class], (options[:max_entry] != -1 and rows_counter >= options[:max_entry]) ? "formnestic-hidden" : nil].compact.join(" "))
       
       end
     end

@@ -3,7 +3,7 @@ var Formnestic = {
 		var counter = 0;
 		table.find('tbody:first').find("tr").each(function() {
       var dom = $(this);
-      if(dom.css('display') != 'none' && dom.hasClass("formnestic-table-no-border") == false) {
+      if(dom.hasClass("formnestic-deleted-row") == false && dom.hasClass("formnestic-table-no-border") == false) {
         counter = counter + 1;
       }//end if
 		});		
@@ -14,7 +14,7 @@ var Formnestic = {
 		var counter = 0;
 		listContainer.children().each(function() {
       var dom = $(this);
-      if(dom.css('display') != 'none') {
+      if(dom.hasClass("formnestic-deleted-row") == false) {
         counter = counter + 1;
       }//end if
 		});		
@@ -33,25 +33,28 @@ var Formnestic = {
     
     if (minNumberOfEntries !== -1) {
       if (numberOfShowingEntries <= minNumberOfEntries) {
-        alert(table.attr("min_entry_alert_message"));
+        alert(nestedModelContainer.attr("min_entry_alert_message"));
         return;
       }//end if
     }//end if
     
     var _this = this;
-    deleteEntryLinkDom.parents("fieldset.inputs:first").find(".formnestic-destroy-input").val("true");
-    deleteEntryLinkDom.parents("fieldset.inputs:first").fadeOut(function() {
-      var counter = _this.addOddAndEventClassForListContainer(listContainer);
-      if (maxNumberOfEntries !== -1) {
-        if (counter <= maxNumberOfEntries) {
-          return addRowLinkContainer.removeClass("hidden");
-        } else {
-          return addRowLinkContainer.addClass("hidden");
-        }//end else
+    var entryContainer = deleteEntryLinkDom.parents("fieldset.inputs:first");
+    entryContainer.addClass("formnestic-deleted-row");
+    entryContainer.find(".formnestic-destroy-input").val("true");
+    
+    var counter = _this.addOddAndEventClassForListContainer(listContainer);
+    if (maxNumberOfEntries !== -1) {
+      if (counter <= maxNumberOfEntries) {
+        addRowLinkContainer.removeClass("formnestic-hidden");
       } else {
-        return addRowLinkContainer.removeClass("hidden");
-      }//end else          
-    });
+        addRowLinkContainer.addClass("formnestic-hidden");
+      }//end else
+    } else {
+      addRowLinkContainer.removeClass("formnestic-hidden");
+    }//end else
+    
+    entryContainer.fadeOut(function() {});
   },
   
   removeATableEntry: function(deleteEntryLinkDom) {
@@ -68,29 +71,31 @@ var Formnestic = {
       }//end if
     }//end if
     
-    var _this = this;
-    deleteEntryLinkDom.parents("tr:first").find(".formnestic-destroy-input").val("true");
-    deleteEntryLinkDom.parents("tr:first").fadeOut(function() {
-      var counter = _this.addOddAndEvenClassForTable(table);
-      if (maxNumberOfEntries !== -1) {
-        if (counter <= maxNumberOfEntries) {
-          return addRowLink.removeClass("hidden");
-        } else {
-          return addRowLink.addClass("hidden");
-        }//end else
+    var trContainer = deleteEntryLinkDom.parents("tr:first");
+    trContainer.find(".formnestic-destroy-input").val("true");
+    trContainer.addClass("formnestic-deleted-row");
+    var counter = this.addOddAndEvenClassForTable(table);
+    if (maxNumberOfEntries !== -1) {
+      if (counter <= maxNumberOfEntries) {
+        addRowLink.removeClass("formnestic-hidden");
       } else {
-        return addRowLink.removeClass("hidden");
-      }//end else          
-    });
+        addRowLink.addClass("formnestic-hidden");
+      }//end else
+    } else {
+      addRowLink.removeClass("formnestic-hidden");
+    }//end else
+    trContainer.fadeOut(function() {});
   },
   
   addOddAndEventClassForListContainer: function(listContainer) {
 		var counter = 0;
 		listContainer.children().each(function() {
       var dom = $(this);
-			if(dom.css('display') !== 'none') {
-				$(this).removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 == 0 ? "formnestic-even-row" : "formnestic-odd-row")
-				counter = counter + 1;
+			if(dom.hasClass("formnestic-deleted-row") == false) {
+				dom.removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 == 0 ? "formnestic-even-row" : "formnestic-odd-row");
+        var counterDom = dom.find("span.formnestic-li-fieldset-for-order:first");
+        counter = counter + 1;
+        counterDom.html(counter);
       }
 		});
 		return counter;    
@@ -100,7 +105,7 @@ var Formnestic = {
     var counter = 0;
 		$(table).find("tbody:first").find("tr").each(function() {
       var trDom = $(this);
-			if(trDom.css('display') !== 'none' && trDom.hasClass("formnestic-table-no-border") == false) {
+			if(trDom.hasClass('formnestic-deleted-row') == false && trDom.hasClass("formnestic-table-no-border") == false) {
 				$(this).removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 == 0 ? "formnestic-even-row" : "formnestic-odd-row")
 				counter = counter + 1;
       }
@@ -118,16 +123,17 @@ var Formnestic = {
     var nestedModelContainer = listContainer.parent();
     var maxNumberOfEntries = parseInt(nestedModelContainer.attr('max_entry'), 10);
     
-    $(content.replace(regexp, newId)).appendTo(listContainer).css({display: 'none'}).fadeIn(function() {
-      var counter = _this.addOddAndEventClassForListContainer(listContainer);
-      if (maxNumberOfEntries !== -1) {
-        if (counter >= maxNumberOfEntries) {
-          return linkDomContainer.addClass("hidden");
-        }//end if
-      } else {
-        return linkDomContainer.removeClass("hidden");
-      }//end else
-    });
+    var entryContainer = $(content.replace(regexp, newId)).appendTo(listContainer)
+    var counter = _this.addOddAndEventClassForListContainer(listContainer);
+    if (maxNumberOfEntries !== -1) {
+      if (counter >= maxNumberOfEntries) {
+        linkDomContainer.addClass("formnestic-hidden");
+      }//end if
+    } else {
+      linkDomContainer.removeClass("formnestic-hidden");
+    }//end else
+    
+    entryContainer.css({display: 'none'}).fadeIn(function() {});
   },
   
   addNewTableEntry: function(linkDom, associationName, content) {
@@ -137,19 +143,18 @@ var Formnestic = {
     var _this = this;
     var table = linkDomjQuery.parents('table:first');
     
-    $(content.replace(regexp, newId)).
-      insertBefore(linkDomjQuery.parents("tr:first"))
-      .css({display: 'none'})
-      .fadeIn(function() {
-        var counter = _this.addOddAndEvenClassForTable(table);
-        var maxNumberOfEntries = parseInt(table.attr('max_entry'), 10);
-        if (maxNumberOfEntries !== -1) {
-          if (counter >= maxNumberOfEntries) {
-            return linkDomjQuery.addClass("hidden");
-          }//end if
-        } else {
-          return linkDomjQuery.removeClass("hidden");
-        }//end else
-      });
+    var entryContainer = $(content.replace(regexp, newId)).insertBefore(linkDomjQuery.parents("tr:first"))
+      
+    var counter = _this.addOddAndEvenClassForTable(table);
+    var maxNumberOfEntries = parseInt(table.attr('max_entry'), 10);
+    if (maxNumberOfEntries !== -1) {
+      if (counter >= maxNumberOfEntries) {
+        return linkDomjQuery.addClass("formnestic-hidden");
+      }//end if
+    } else {
+      return linkDomjQuery.removeClass("formnestic-hidden");
+    }//end else
+    
+    entryContainer.css({display: 'none'}).fadeIn(function() {});
   }
 }

@@ -12,6 +12,13 @@ module Formnestic
         options[:min_entry] ||= -1
         options[:max_entry] ||= -1
         
+        entity_name = I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}", default: record_or_name_or_array.to_s.singularize)
+        options[:min_entry_alert_message] = options[:min_entry] != -1 ? (options[:min_entry_alert_message] ||
+               I18n.t('formnestic.labels.there_must_be_at_least_a_number_of_entries', {
+                 count: (options[:min_entry]), 
+                 entity_singular: entity_name, 
+                 entity_plural: entity_name.pluralize})) : ''
+                 
         if options[:row_addable]
           add_new_record_button_row = template.content_tag(:div, formnestic_link_to_add_fields_with_content(record_or_name_or_array, *args, &block), class: "formnestic-list-new-entry-link-container")
           contents.push(add_new_record_button_row)

@@ -85,6 +85,7 @@ table.formnestic-table-inputs tbody td {
   p.inline-errors {
     margin-top: 2px;
     color: #c00;
+    margin-left: 0;
     line-height: 1.5;
   }
 }
@@ -159,4 +160,8 @@ table.formnestic-table-inputs tbody a.formnestic-add-row-field-link {
   &:hover {
     background: #89BC69;
   };
+}
+
+.formnestic-hidden {
+  display: none;
 }

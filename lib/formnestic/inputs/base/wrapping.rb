@@ -52,7 +52,7 @@ module Formnestic
           
           extra_input = ""        
           if self.options[:other_input_field_name].blank? == false and self.options[:other_trigger_value].blank? == false
-            extra_class_for_input = "hidden"
+            extra_class_for_input = "formnestic-hidden"
 
             gsub_attribute_name = (association_primary_key || sanitized_method_name).to_s
             actual_value = if self.object.send(self.method).class < ActiveRecord::Base
@@ -66,10 +66,10 @@ module Formnestic
             extra_input += template.javascript_tag(%Q{
               $('##{self.dom_id}').change(function() { 
                 if($(this).val() == '#{self.options[:other_trigger_value]}') {
-                  $(this).parent().find('input.other').removeClass('hidden').focus();
+                  $(this).parent().find('input.other').removeClass('formnestic-hidden').focus();
                 }//end if
                 else {
-                  $(this).parent().find('input.other').addClass('hidden');
+                  $(this).parent().find('input.other').addClass('formnestic-hidden');
                 }
               });})
           end
