@@ -5,6 +5,60 @@
 
 An extension of formtastic form builder gem to aids in building nested or association form
 
+### Installation
+
+```ruby
+gem "formnestic"
+```
+
+### Features
+
+TBA
+
+### Usage
+
+```erb
+<div style='width: 550px; margin: 20px auto; '>
+  <div class='form-title'>New Quiz Pool</div>
+  <%= semantic_form_for @quiz_pool do |quiz_pool_form| %>
+    <%= quiz_pool_form.inputs do %>
+      <%= quiz_pool_form.input :title %>
+      <%= quiz_pool_form.input :description %>
+      <li>
+        <%= quiz_pool_form.semantic_fields_for :quiz_pool_questions, {
+          row_removable: true, 
+          row_addable: true,
+          min_entry: 1, 
+          max_entry: 5,
+          new_record_link_label: "+ question"
+        } do |quiz_pool_question_builder| %>
+          <%= quiz_pool_question_builder.inputs do %>
+            <%= quiz_pool_question_builder.input :description %>
+            <%= quiz_pool_question_builder.input :score %>
+            <li>
+              <%= quiz_pool_question_builder.semantic_fields_for :quiz_pool_question_options, {
+                display_type: "table", 
+                row_removable: true, 
+                row_addable: true, 
+                min_entry: 1, 
+                max_entry: 5,
+                new_record_link_label: "+ answer"                
+              } do |quiz_pool_option_builder| %>
+                <%= quiz_pool_option_builder.inputs do %>
+                  <%= quiz_pool_option_builder.input :description, as: :string, :hint => "abc" %>
+                  <%= quiz_pool_option_builder.input :is_correct %>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+    <%= quiz_pool_form.submit %>
+  <% end %>
+</div>
+```
+
 ## Contributing to formnestic
  
 - Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
