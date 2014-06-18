@@ -3,9 +3,16 @@
 [![Build Status](https://travis-ci.org/jameshuynh/formnestic.svg?branch=master)](https://travis-ci.org/jameshuynh/formnestic)
 [![Code Climate](https://codeclimate.com/github/jameshuynh/formnestic.png)](https://codeclimate.com/github/jameshuynh/formnestic)
 
-An extension of formtastic form builder gem to aids in building nested or association form
+An extension of [formtastic form builder](https://github.com/justinfrench/formtastic) gem to aids in building nested or association form
+
+### Compatibility
+
+- Rails > 4.0 (Support will be soon available)
+- Rails > 3.2
 
 ### Installation
+
+Add Formnestic to your Gemfile and run ``bundle install``:
 
 ```ruby
 gem "formnestic"
@@ -13,7 +20,7 @@ gem "formnestic"
 
 ### Features
 
-TBA
+- 
 
 ### Usage
 
