@@ -17,7 +17,15 @@ table.formnestic-table-inputs tbody td {
     border: 1px solid #ccc;
     padding: 5px;
     font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
   } 
+  
+  p.inline-errors {
+    margin-top: 2px;
+    color: #c00;
+    line-height: 1.5;
+  }
 }
 
 table.formnestic-table-inputs tbody tr {
@@ -29,11 +37,11 @@ table.formnestic-table-inputs tbody tr {
   }  
 }
 
-table.formnestic-table-inputs td.date ol.fragments-group {
+table.formnestic-table-inputs td.date_select ol.fragments-group {
   list-style-type: none;
 }
 
-table.formnestic-table-inputs td.date ol.fragments-group li.fragment {
+table.formnestic-table-inputs td.date_select ol.fragments-group li.fragment {
   float: left;
   margin-right: 5px;
 }

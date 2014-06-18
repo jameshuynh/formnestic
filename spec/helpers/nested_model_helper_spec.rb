@@ -15,7 +15,7 @@ describe 'Formnestic Table Form' do
           concat(post_builder.inputs do
             concat(post_builder.input :title)
             concat(post_builder.input :body)
-            concat(post_builder.input :post_date, as: :date)
+            concat(post_builder.input :post_date, as: :date_select)
           end)
         end)
       end)
@@ -74,7 +74,7 @@ describe 'Formnestic Table Form' do
           concat(post_builder.inputs do
             concat(post_builder.input :title)
             concat(post_builder.input :body)
-            concat(post_builder.input :post_date, as: :date)
+            concat(post_builder.input :post_date, as: :date_select)
           end)
         end)
       end)
@@ -95,7 +95,7 @@ describe 'Formnestic Table Form' do
           concat(post_builder.inputs do
             concat(post_builder.input :title)
             concat(post_builder.input :body)
-            concat(post_builder.input :post_date, as: :date)
+            concat(post_builder.input :post_date, as: :date_select)
           end)
         end)
       end)
@@ -116,7 +116,7 @@ describe 'Formnestic Table Form' do
           concat(post_builder.inputs do
             concat(post_builder.input :title)
             concat(post_builder.input :body)
-            concat(post_builder.input :post_date, as: :date)
+            concat(post_builder.input :post_date, as: :date_select)
           end)
         end)
       end)

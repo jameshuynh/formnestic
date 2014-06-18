@@ -4,7 +4,7 @@ module Formnestic
     def formnestic_table_semantic_fields_for(record_or_name_or_array, *args, &block)
       options = args.dup.extract_options!
       options[:parent_builder] ||= self 
-      formnestic_add_table_headers_attributes
+      formnestic_add_table_form_attributes
       
       existing_rows = formtastic_semantic_fields_for(record_or_name_or_array, *args, &block)
       contents = [existing_rows]
@@ -19,11 +19,13 @@ module Formnestic
       
       options[:min_entry] ||= -1
       options[:max_entry] ||= -1
+      
+      entity_name = I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}", default: record_or_name_or_array.to_s.singularize)
       options[:min_entry_alert_message] = options[:min_entry] != -1 ? (options[:min_entry_alert_message] ||
              I18n.t('formnestic.labels.there_must_be_at_least_a_number_of_entries', {
                count: (options[:min_entry]), 
-               entity_singular: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}"), 
-               entity_plural: I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}").pluralize})) : ''
+               entity_singular: entity_name, 
+               entity_plural: entity_name.pluralize})) : ''
                
       template.content_tag(:table,
         [table_header, template.content_tag(:tbody, Formtastic::Util.html_safe(contents.join))].join.html_safe,
@@ -31,9 +33,10 @@ module Formnestic
       )
     end
     
-    def formnestic_add_table_headers_attributes
+    def formnestic_add_table_form_attributes
       instance_eval do
         instance_variable_set("@table_headers", [])
+        instance_variable_set("@rows_counter", 0)
         def table_headers
           return @table_headers
         end
@@ -43,23 +46,32 @@ module Formnestic
             @table_headers.push({attr: column_name, class: class_name.to_s.tableize.gsub("formtastic/inputs/", "").gsub("_", "-").gsub("-inputs", ""), label_text: label_text})
           end
         end
+        
+        def rows_counter
+          return @rows_counter
+        end
+        
+        def increase_rows_counter
+          @rows_counter += 1
+        end
       end
     end
     
     def formnestic_link_to_add_fields_with_content(record_or_name_or_array, *args, &block)
       new_object = self.object.class.reflect_on_association(record_or_name_or_array).klass.new
       options = args.dup.extract_options!
+      options[:max_entry] ||= -1
       duplicate_args = args.dup
       duplicate_args = duplicate_args.unshift(new_object)
       new_record_form_options = duplicate_args.extract_options!
-      
       options[:parent_builder] ||= self
+      rows_counter = self.rows_counter
       new_record_form_options[:child_index] = "new_#{record_or_name_or_array}"
       new_record_form_content = formtastic_semantic_fields_for(record_or_name_or_array, *(duplicate_args << new_record_form_options), &block)
       link_title = options[:new_record_link_label] || I18n.t("formnestic.labels.add_new_entry")
       template.link_to_function(link_title, \
         "Formnestic.addNewTableEntry(this, \"#{record_or_name_or_array}\", \"#{escape_javascript(new_record_form_content)}\")", \
-          "class" => ["formnestic-add-row-field-link", options[:new_record_link_class]].compact.join(" "))
+          "class" => ["formnestic-add-row-field-link", options[:new_record_link_class], rows_counter >= options[:max_entry] ? "hidden" : nil].compact.join(" "))
       
     end
         

@@ -23,7 +23,7 @@ module Formnestic
   Formtastic::Inputs::DatetimeInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
   Formtastic::Inputs::TimeInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
   
-  Formtastic::Inputs::DateInput.class_eval do
+  Formtastic::Inputs::DateSelectInput.class_eval do
     def fragment_label_html(fragment)
       if self.builder.options[:display_type] == "table"
         "".html_safe

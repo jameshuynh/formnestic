@@ -12,12 +12,13 @@ var Formnestic = {
   removeATableEntry: function(deleteEntryLinkDom) {
     deleteEntryLinkDom = $(deleteEntryLinkDom);
     var table = deleteEntryLinkDom.parents("table:first");
-    var addRowLink = table.find("a.formnestic-add-field-link:first");
+    var addRowLink = table.find("a.formnestic-add-row-field-link:first");
     var numberOfShowingEntries = Formnestic.getNumberOfShowingEntriesInATable(table) - 1;
     var minNumberOfEntries = parseInt(table.attr("min_entry"), 10);
+    var maxNumberOfEntries = parseInt(table.attr("max_entry"), 10);    
     if (minNumberOfEntries !== -1) {
-      if (number_of_showing_entries <= minNumberOfEntries) {
-        alert(addRowLink.attr("data-min-entry-alert"));
+      if (numberOfShowingEntries <= minNumberOfEntries) {
+        alert(table.attr("min_entry_alert_message"));
         return;
       }//end if
     }//end if
@@ -25,17 +26,9 @@ var Formnestic = {
     var _this = this;
     deleteEntryLinkDom.parents("tr:first").find(".formnestic-destroy-input").val("true");
     deleteEntryLinkDom.parents("tr:first").fadeOut(function() {
-      var counter = 0;
-      $(this).parents("tbody:first").find("tr").each(function() {
-        if ($(this).css('display') !== 'none') {
-          $(this).removeClass("odd").removeClass("even").addClass(counter % 2 === 0 ? "even" : "odd");
-          counter = counter + 1;
-        }//end if
-      });
-      
-      _this.addOddAndEvenClassForTable(table);
-      if (addRowLink.attr("data-max-entry") && parseInt(addRowLink.attr("data-max-entry"), 10) !== -1) {
-        if (counter <= parseInt(addRowLink.attr("data-max-entry"), 10)) {
+      var counter = _this.addOddAndEvenClassForTable(table);
+      if (maxNumberOfEntries !== -1) {
+        if (counter <= maxNumberOfEntries) {
           return addRowLink.removeClass("hidden");
         } else {
           return addRowLink.addClass("hidden");
@@ -49,11 +42,14 @@ var Formnestic = {
   addOddAndEvenClassForTable: function(table) {
     var counter = 0;
 		$(table).find("tbody:first").find("tr").each(function() {
-			if($(this).css('display') !== 'none') {
+      var trDom = $(this);
+			if(trDom.css('display') !== 'none' && trDom.hasClass("formnestic-table-no-border") == false) {
 				$(this).removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 == 0 ? "formnestic-even-row" : "formnestic-odd-row")
 				counter = counter + 1;
       }
 		});
+    
+    return counter;
   },
   
   addNewTableEntry: function(linkDom, associationName, content) {
@@ -62,11 +58,12 @@ var Formnestic = {
     var linkDomjQuery = $(linkDom);
     var _this = this;
     var table = linkDomjQuery.parents('table:first');
+    
     $(content.replace(regexp, newId)).
       insertBefore(linkDomjQuery.parents("tr:first"))
       .css({display: 'none'})
       .fadeIn(function() {
-        _this.addOddAndEvenClassForTable(table);
+        var counter = _this.addOddAndEvenClassForTable(table);
         var maxNumberOfEntries = parseInt(table.attr('max_entry'), 10);
         if (maxNumberOfEntries !== -1) {
           if (counter >= maxNumberOfEntries) {
@@ -74,8 +71,7 @@ var Formnestic = {
           }//end if
         } else {
           return linkDomjQuery.removeClass("hidden");
-        }//end else
-        
+        }//end else        
       });
   }
 }

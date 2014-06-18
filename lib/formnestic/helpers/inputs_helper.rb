@@ -12,6 +12,9 @@ module Formnestic
           html_options[:name] = title
           
           html_options[:class] = html_options[:class].blank? ? "formnestic-tr-fieldset" : "#{html_options[:class]} formnestic-tr-fieldset"
+          html_options[:class] = "#{html_options[:class]} #{self.options[:parent_builder].rows_counter % 2 == 0 ? 'formnestic-even-row': 'formnestic-odd-row'}"
+          
+          self.options[:parent_builder].increase_rows_counter                    
           if options[:row_removable] == true
             contents = []
             contents.push(self.hidden_field(:_destroy, class: "formnestic-destroy-input", value: false))

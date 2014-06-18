@@ -6,7 +6,7 @@ module Formnestic
           if self.builder.options[:display_type] == "table"
             if self.instance_of?(Formtastic::Inputs::SelectInput)
               select_input_wrapping(&block)    
-            elsif self.instance_of?(Formtastic::Inputs::DateInput)
+            elsif self.instance_of?(Formtastic::Inputs::DateSelectInput)
               table_date_select_input_wrapping(&block)
             else
               table_input_wrapping(&block)
