@@ -9,6 +9,7 @@ An extension of famous [Formtastic form builder ](https://github.com/justinfrenc
 
 - Rails > 4.0 (Support will be soon available)
 - Rails > 3.2
+  - [Sample project for Rails 3.2](https://github.com/jameshuynh/formnestic-sample-rails3)
 
 ### Installation
 
