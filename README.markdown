@@ -1,7 +1,7 @@
 # formnestic
 
 [![Build Status](https://travis-ci.org/jameshuynh/formnestic.svg?branch=master)](https://travis-ci.org/jameshuynh/formnestic)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/jameshuynh/formnestic)
+[![Code Climate](https://codeclimate.com/github/jameshuynh/formnestic.png)](https://codeclimate.com/github/jameshuynh/formnestic)
 
 An extension of formtastic form builder gem to aids in building nested or association form
 
