@@ -1,5 +1,64 @@
 @import 'entypo';
 
+form.formtastic .stringish input {
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 12px;
+}
+
+form.formtastic .text textarea {
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 12px;
+}
+
+div.formnestic-nested-model-container fieldset.formnestic-li-fieldset {
+  position: relative;
+  margin-bottom: 15px;
+  border-bottom: 1px dashed #ccc;
+  div.formnestic-li-fieldset-legend {
+    background: #346A89;
+    color: #fff;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 10px;
+  }  
+  div.formnestic-minus-button-container {
+    position: absolute;
+    top: 7px;
+    right: 0;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+}
+
+div.formnestic-nested-model-container {
+  input[type=text], input[type=number] {
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 12px;
+  } 
+  textarea {
+    padding: 5px;
+    border: 1px solid #ccc;
+  }
+    
+  div.formnestic-list-new-entry-link-container {
+    margin-bottom: 10px;
+    text-align: right;
+    margin-top: 10px;
+    a {
+      border-radius: 5px;
+      background: #4C88AA;
+      color: #fff;
+      padding: 5px;
+      text-decoration: none;
+    }
+  }
+}
+
 table.formnestic-table-inputs {
   width: 100%;
 }
@@ -28,7 +87,14 @@ table.formnestic-table-inputs tbody td {
   }
 }
 
-table.formnestic-table-inputs tbody tr {
+table.formnestic-table-inputs tbody tr.inputs {
+  td {
+    padding: 5px;
+    vertical-align: top;
+    p.inline-hints {
+      margin-left: 0;
+    }
+  }
   &.formnestic-odd-row td {
     background: #eee;
   }
@@ -51,6 +117,10 @@ table.formnestic-table-inputs thead tr th.formnestic-minus-thead {
 }
 
 table.formnestic-table-inputs tbody tr td.formnestic-minus-button-cell {
+}
+
+table.formnestic-table-inputs tbody tr td.boolean label {
+  padding-left: 0;
 }
 
 table.formnestic-table-inputs tbody tr.formnestic-table-no-border td {

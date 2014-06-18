@@ -118,6 +118,10 @@ Spork.each_run do
       def post_date
         Date.today
       end
+      
+      def recent
+        true
+      end      
     end
 
     module ::Namespaced
@@ -334,6 +338,7 @@ Spork.each_run do
       @alan_post1.stub!(:errors).and_return(mock('errors', :[] => nil))
       @alan_post1.stub!(:to_key).and_return(nil)
       @alan_post1.stub!(:persisted?).and_return(nil)
+      @alan_post1.stub!(:recent).and_return(true)
       
       @alan_post2 = mock('post')
       @alan_post2.stub!(:to_ary)
@@ -350,6 +355,7 @@ Spork.each_run do
       @alan_post2.stub!(:errors).and_return(mock('errors', :[] => nil))
       @alan_post2.stub!(:to_key).and_return(nil)
       @alan_post2.stub!(:persisted?).and_return(nil)
+      @alan_post2.stub!(:recent).and_return(true)
       
       @alan.stub!(:posts).and_return([@alan_post1, @alan_post2])
 
@@ -444,7 +450,7 @@ Spork.each_run do
       @new_post.stub!(:document).and_return(@mock_file)
       @new_post.stub!(:column_for_attribute).with(:meta_description).and_return(mock('column', :type => :string, :limit => 255))
       @new_post.stub!(:column_for_attribute).with(:title).and_return(mock('column', :type => :string, :limit => 50))
-      @new_post.stub!(:column_for_attribute).with(:body).and_return(mock('column', :type => :text))
+      @new_post.stub!(:column_for_attribute).with(:body).and_return(mock('column', :type => :text))      
       @new_post.stub!(:column_for_attribute).with(:published).and_return(mock('column', :type => :boolean))
       @new_post.stub!(:column_for_attribute).with(:publish_at).and_return(mock('column', :type => :date))
       @new_post.stub!(:column_for_attribute).with(:time_zone).and_return(mock('column', :type => :string))

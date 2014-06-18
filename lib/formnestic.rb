@@ -19,9 +19,10 @@ module Formnestic
   Formtastic::Inputs::Base.send(:alias_method, :formtastic_render_label?, :render_label?)
   Formtastic::Inputs::Base.send(:include, Formnestic::Inputs::Base::Labelling)
   
-  Formtastic::Inputs::DateInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
+  Formtastic::Inputs::DateSelectInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
   Formtastic::Inputs::DatetimeInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
   Formtastic::Inputs::TimeInput.send(:alias_method, :formtastic_fragment_label_html, :fragment_label_html)  
+  Formtastic::Inputs::BooleanInput.send(:alias_method, :formtastic_label_text_with_embedded_checkbox, :label_text_with_embedded_checkbox)  
   
   Formtastic::Inputs::DateSelectInput.class_eval do
     def fragment_label_html(fragment)
@@ -53,11 +54,23 @@ module Formnestic
     end
   end  
   
+  Formtastic::Inputs::BooleanInput.class_eval do
+    def label_text_with_embedded_checkbox
+      if self.builder.options[:display_type] == 'table'
+        check_box_html
+      else
+        formtastic_label_text_with_embedded_checkbox
+      end
+    end          
+  end
+  
   Formtastic::FormBuilder.class_eval do
     def semantic_fields_for(record_or_name_or_array, *args, &block)
       options = args.dup.extract_options!
       if options[:display_type] == 'table'       
         formnestic_table_semantic_fields_for(record_or_name_or_array, *args, &block)
+      elsif options[:row_removable].present? or options[:row_addable].present?
+        formnestic_list_semantic_fields_for(record_or_name_or_array, *args, &block)
       else
         formtastic_semantic_fields_for(record_or_name_or_array, *args, &block)
       end

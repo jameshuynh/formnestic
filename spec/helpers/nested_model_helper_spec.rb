@@ -59,7 +59,7 @@ describe 'Formnestic Table Form' do
       output_buffer.should_not have_tag('form table.formnestic-table-inputs tbody td.date label')
     end
     
-    it 'must have an a tag with onclick is addNewTableEntry javascript call' do
+    it 'must have a tag with onclick is addNewTableEntry javascript call' do
       output_buffer.should have_tag("form table.formnestic-table-inputs tr.formnestic-table-no-border a[@onclick*='Formnestic.addNewTableEntry']")
     end    
   end
@@ -124,6 +124,25 @@ describe 'Formnestic Table Form' do
     
     it "must have a tag with onclick is addNewTableEntry javascript call and text is Add new option" do
       output_buffer.should have_tag("form table.formnestic-table-inputs tr.formnestic-table-no-border a[@onclick*='Formnestic.addNewTableEntry']", "Add new option", count: 1)
+    end
+  end
+  
+  describe 'table formnestic with boolean field' do
+    before do
+      @output_buffer = ''
+      mock_everything   
+    
+      concat(semantic_form_for(@alan) do |builder|
+        concat(builder.semantic_fields_for(:posts, :display_type => "table", row_removable: true, row_addable: true, new_record_link_label: "Add new option") do |post_builder|
+          concat(post_builder.inputs do
+            concat(post_builder.input :recent, as: :boolean)
+          end)
+        end)
+      end)
+    end
+    
+    it "must not have is new text in boolean input" do
+      output_buffer.should_not have_tag("form table.formnestic-table-inputs tbody label", "Recent")
     end
   end
 end
