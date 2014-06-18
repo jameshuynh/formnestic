@@ -20,7 +20,8 @@ gem "formnestic"
 
 ### Features
 
-- Table form 
+- Table form with row addable or removable
+- List form with entry addable or removable
 
 ### Usage
 
