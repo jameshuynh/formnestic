@@ -18,10 +18,6 @@ Add Formnestic to your Gemfile and run ``bundle install``:
 gem "formnestic"
 ```
 
-### Features
-
-- 
-
 ### Usage
 
 ```erb
