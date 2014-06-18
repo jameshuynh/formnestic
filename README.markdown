@@ -18,6 +18,12 @@ Add Formnestic to your Gemfile and run ``bundle install``:
 gem "formnestic"
 ```
 
+then run the installation
+
+```bash
+bundle exec rails g formnestic:install
+```
+
 ### Features
 
 - Table form with row addable or removable
