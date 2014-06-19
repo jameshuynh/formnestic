@@ -68,7 +68,6 @@ The form view is the same between Rails 3 and Rails 4
 <% end %>
 ```
 
-
 See the usage for each of Rails version below for more details
 
 #### Rails 3 Usage
@@ -80,6 +79,21 @@ See the usage for each of Rails version below for more details
 
 - [Usage & Guideline](https://github.com/jameshuynh/formnestic/wiki/Rails-4-Guideline-and-Usage)
 - [Sample project for Rails 4.1.1](https://github.com/jameshuynh/formnestic-sample-rails4)
+
+
+#### Screenshots
+
+##### Table Form
+
+<p align="left" >
+  <img src="https://raw.githubusercontent.com/jameshuynh/formnestic/master/screenshots/table_form.png" alt="Table Form" title="Table Form">
+</p>
+
+#### List Form
+
+<p align="left" >
+  <img src="https://raw.githubusercontent.com/jameshuynh/formnestic/master/screenshots/list_form.png" alt="List Form" title="List Form">
+</p>
 
 ### Roadmap to version 2.0
 
