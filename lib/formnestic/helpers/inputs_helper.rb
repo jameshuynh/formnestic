@@ -4,7 +4,7 @@ module Formnestic
       def inputs(*args, &block)
         if options[:display_type] == 'table'  
           formnestic_table_row_inputs(*args, &block)  
-        elsif options[:row_removable] == true or options[:row_addable] == true
+        elsif options[:row_removable] or options[:row_addable]
           formnestic_list_row_inputs(*args, &block)
         else
           formtastic_inputs(*args, &block)
@@ -18,7 +18,8 @@ module Formnestic
         html_options[:class] = [html_options[:class] || "inputs", "formnestic-li-fieldset", formnestic_row_class_based_on_position(options[:parent_builder].rows_counter)].join(" ")        
         self.options[:parent_builder].increase_rows_counter
                         
-        content_div_content = formnestic_legend_for_list_form + "&nbsp;#".html_safe +  template.content_tag(:span, self.options[:parent_builder].rows_counter, class: "formnestic-li-fieldset-for-order")
+        rows_counter = template.content_tag(:span, self.options[:parent_builder].rows_counter, class: "formnestic-li-fieldset-for-order")
+        content_div_content = [formnestic_legend_for_list_form, "&nbsp;#".html_safe, rows_counter].join
         title_div = template.content_tag(:div, content_div_content, class: "formnestic-li-fieldset-legend")        
         template.content_tag(:fieldset, title_div + (options[:row_removable] ? formnestic_row_removing_cell_for_list : '') + template.capture(&block), html_options)
       end
