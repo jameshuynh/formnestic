@@ -3,7 +3,7 @@ var Formnestic = {
 		var counter = 0;
 		table.find('tbody:first').find("tr").each(function() {
       var dom = $(this);
-      if(dom.hasClass("formnestic-deleted-row") == false && dom.hasClass("formnestic-table-no-border") == false) {
+      if(!dom.hasClass("formnestic-deleted-row") && !dom.hasClass("formnestic-table-no-border")) {
         counter = counter + 1;
       }//end if
 		});		
@@ -14,7 +14,7 @@ var Formnestic = {
 		var counter = 0;
 		listContainer.children().each(function() {
       var dom = $(this);
-      if(dom.hasClass("formnestic-deleted-row") == false) {
+      if(!dom.hasClass("formnestic-deleted-row")) {
         counter = counter + 1;
       }//end if
 		});		
@@ -33,8 +33,7 @@ var Formnestic = {
     
     if (minNumberOfEntries !== -1) {
       if (numberOfShowingEntries <= minNumberOfEntries) {
-        alert(nestedModelContainer.attr("min_entry_alert_message"));
-        return;
+        return alert(nestedModelContainer.attr("min_entry_alert_message"));
       }//end if
     }//end if
     
@@ -44,12 +43,8 @@ var Formnestic = {
     entryContainer.find(".formnestic-destroy-input").val("true");
     
     var counter = _this.addOddAndEventClassForListContainer(listContainer);
-    if (maxNumberOfEntries !== -1) {
-      if (counter <= maxNumberOfEntries) {
-        addRowLinkContainer.removeClass("formnestic-hidden");
-      } else {
-        addRowLinkContainer.addClass("formnestic-hidden");
-      }//end else
+    if (maxNumberOfEntries !== -1 && counter <= maxNumberOfEntries) {
+      addRowLinkContainer.removeClass("formnestic-hidden");
     } else {
       addRowLinkContainer.removeClass("formnestic-hidden");
     }//end else
@@ -91,7 +86,7 @@ var Formnestic = {
 		var counter = 0;
 		listContainer.children().each(function() {
       var dom = $(this);
-			if(dom.hasClass("formnestic-deleted-row") == false) {
+			if(!dom.hasClass("formnestic-deleted-row")) {
 				dom.removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 == 0 ? "formnestic-even-row" : "formnestic-odd-row");
         var counterDom = dom.find("span.formnestic-li-fieldset-for-order:first");
         counter = counter + 1;
@@ -105,7 +100,7 @@ var Formnestic = {
     var counter = 0;
 		$(table).find("tbody:first").find("tr").each(function() {
       var trDom = $(this);
-			if(trDom.hasClass('formnestic-deleted-row') == false && trDom.hasClass("formnestic-table-no-border") == false) {
+			if(!trDom.hasClass('formnestic-deleted-row') && !trDom.hasClass("formnestic-table-no-border")) {
 				$(this).removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 == 0 ? "formnestic-even-row" : "formnestic-odd-row")
 				counter = counter + 1;
       }
