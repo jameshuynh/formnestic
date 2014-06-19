@@ -7,7 +7,8 @@ An extension of famous [Formtastic form builder ](https://github.com/justinfrenc
 
 ### Compatibility
 
-- Rails > 4.0 (Support will be soon available)
+- Rails > 4.0
+  - [Sample project for Rails 4.1.1](https://github.com/jameshuynh/formnestic-sample-rails4)
 - Rails > 3.2
   - [Sample project for Rails 3.2](https://github.com/jameshuynh/formnestic-sample-rails3)
 
@@ -32,7 +33,35 @@ bundle exec rails g formnestic:install
 
 ### Usage
 
-Usage for rails 3 and rails 4 are almost the same, the only difference is that in rails4, you will need to remove all the ``attr_accessible`` inr rails3 and use strong parameters in rails controller.
+Usage for rails 3 and rails 4 are almost the same, the only difference is that in Rails 4, you will need to remove all the ``attr_accessible`` in Rails 3 and use strong parameters in rails controller.
+
+The form view is the same between Rails 3 and Rails 4
+
+```erb
+<%= semantic_form_for @quiz_pool do |quiz_pool_form| %>
+  <%= quiz_pool_form.inputs do %>
+    <%= quiz_pool_form.input :title %>
+    <%= quiz_pool_form.input :description %>
+    <li>
+      <%= quiz_pool_form.semantic_fields_for :quiz_pool_questions, {
+        row_removable: true, 
+        row_addable: true,
+        min_entry: 1, 
+        max_entry: 5,
+        new_record_link_label: "+ question"
+      } do |quiz_pool_question_builder| %>
+        <%= quiz_pool_question_builder.inputs do %>
+          <%= quiz_pool_question_builder.input :description %>
+          <%= quiz_pool_question_builder.input :score %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+  <%= quiz_pool_form.submit %>
+<% end %>
+```
+
+See the usage for each of Rails version below for more details
 
 #### Rails 3 Usage
 
