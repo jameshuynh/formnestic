@@ -35,6 +35,15 @@ bundle exec rails g formnestic:install
 
 Usage for rails 3 and rails 4 are almost the same, the only difference is that in Rails 4, you will need to remove all the ``attr_accessible`` in Rails 3 and use strong parameters in rails controller.
 
+Basically, you can now add the following options into ``semantic_fields_for`` call in Formtastic
+
+- ``display_type``: If you want your nested form to have table style, you can supply in ``table`` string
+- ``row_removable``: Allow nested model entry to be removed.
+- ``row_addable``: Allow nested model entry to be added.
+- ``min_entry``: Minimum number of nested model entries that is allowed. An alert will be shown if user tries to delete the last entry that meets this minumum number.
+- ``max_entry``: Maximum number of nested model entries that is allowed. Add button will be hidden if user has already added enough entries.
+- ``new_record_link_label``: The label to be displayed in the Add button.
+
 The form view is the same between Rails 3 and Rails 4
 
 ```erb
@@ -60,6 +69,7 @@ The form view is the same between Rails 3 and Rails 4
   <%= quiz_pool_form.submit %>
 <% end %>
 ```
+
 
 See the usage for each of Rails version below for more details
 
