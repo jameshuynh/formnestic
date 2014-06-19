@@ -39,7 +39,7 @@ var Formnestic = {
     entryContainer.addClass("formnestic-deleted-row");
     entryContainer.find(".formnestic-destroy-input").val("true");
     
-    var counter = _this.addOddAndEventClassForListContainer(listContainer);
+    var counter = this.addOddAndEventClassForListContainer(listContainer);
     if (maxNumberOfEntries !== -1 && counter >= maxNumberOfEntries) {
       addRowLinkContainer.addClass("formnestic-hidden");
     } else {
@@ -126,7 +126,7 @@ var Formnestic = {
     
     var entryContainer = $(content.replace(regexp, newId)).insertBefore(linkDomjQuery.parents("tr:first"));
       
-    var counter = _this.addOddAndEvenClassForTable(table);
+    var counter = this.addOddAndEvenClassForTable(table);
     var maxNumberOfEntries = parseInt(table.attr('max_entry'), 10);
     if (maxNumberOfEntries !== -1 && counter >= maxNumberOfEntries) {
       linkDomjQuery.addClass("formnestic-hidden");
