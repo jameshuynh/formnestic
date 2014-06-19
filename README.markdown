@@ -92,6 +92,10 @@ See the usage for each of Rails version below for more details
 - Contribution, Suggestion and Issues are very much appreciated :). Please also fork and send your pull request!
 - Make sure to add tests for it when sending for pull requests. This is important so I don't break it in a future version unintentionally.
 
+## Credits
+
+- Big thanks to Justin French for bringing [Formtastic](https://github.com/justinfrench/formtastic) to our lives. It has enabled us to effectively code form much easier in rails and has enabled this gem to happen.
+
 ## Copyright
 
 Copyright (c) 2014 James, released under the MIT license
