@@ -47,14 +47,14 @@ formnestic_row_removing_cell_for_table : ''), html_options)
       def formnestic_row_removing_cell_for_list
         contents = []
         contents.push(self.hidden_field(:_destroy, class: "formnestic-destroy-input", value: false))
-        contents.push(template.content_tag(:div, '', title: I18n.t("formnestic.labels.remove_this_entry"), class: "formnestic-list-item-minus-button icon-cancel-circled", onclick: 'Formnestic.removeAListEntry(this);'))            
-        template.content_tag(:div, contents.join.html_safe, class: "formnestic-minus-button-container")   
+        contents.push(template.content_tag(:div, '', title: I18n.t("formnestic.labels.remove_this_entry"), class: "formnestic-list-item-minus-button icon-cancel-circled", onclick: 'Formnestic.removeAListEntry(this);'))
+        template.content_tag(:div, contents.join.html_safe, class: "formnestic-minus-button-container")
       end
       
       def formnestic_row_removing_cell_for_table
         contents = []
         contents.push(self.hidden_field(:_destroy, class: "formnestic-destroy-input", value: false))
-        contents.push(template.content_tag(:div, '', title: I18n.t("formnestic.labels.remove_this_entry"), class: "formnestic-table-minus-button icon-cancel-circled", onclick: 'Formnestic.removeATableEntry(this);'))            
+        contents.push(template.content_tag(:div, '', title: I18n.t("formnestic.labels.remove_this_entry"), class: "formnestic-table-minus-button icon-cancel-circled", onclick: 'Formnestic.removeATableEntry(this);'))
         template.content_tag(:td, contents.join.html_safe, class: "formnestic-minus-button-cell")
       end
     end
