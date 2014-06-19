@@ -23,6 +23,7 @@ Jeweler::Tasks.new do |gem|
   gem.email = "james@rubify.com"
   gem.authors = ["James"]
   gem.version = File.exist?('VERSION') ? File.read('VERSION') : ""
+  gem.files.exclude 'screenshots'
   # dependencies defined in Gemfile
 end
 # Jeweler::RubygemsDotOrgTasks.new

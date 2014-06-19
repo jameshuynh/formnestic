@@ -1,8 +1,0 @@
-en:
-  formnestic:
-    labels:
-      remove_this_entry: Remove this entry
-      there_must_be_at_least_a_number_of_entries: 
-        one: "<b class='formnestic-alert-confirm-title'>Cannot remove %{entity_singular}</b><br/><br/><span class='formnestic-confirm-message'>There must be at least 1 %{entity_singular}</span>"
-        other: "<b class='formnestic-alert-confirm-title'>Cannot remove %{entity_singular}</b><br/><br/><span class='formnestic-confirm-message'>There must be at least %{count} %{entity_plural}</span>"
-      add_new_entry: "+ new entry"

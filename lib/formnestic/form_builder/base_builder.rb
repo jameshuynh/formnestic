@@ -2,6 +2,15 @@ module Formnestic
   module FormBuilder
     module BaseBuilder
       
+      def formnestic_min_entry_alert_message(record_or_name_or_array, min_entry)
+        entity_name = I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}", default: record_or_name_or_array.to_s.gsub("_", " ").singularize.singularize)
+        min_entry != -1 ? (options[:min_entry_alert_message] ||
+             I18n.t('formnestic.labels.there_must_be_at_least_a_number_of_entries', {
+               count: min_entry,
+               entity_singular: entity_name, 
+               entity_plural: entity_name.pluralize})) : ''
+      end
+            
       def formnestic_add_rows_counter_related_attributes
         instance_eval do
           instance_variable_set("@rows_counter", 0)        

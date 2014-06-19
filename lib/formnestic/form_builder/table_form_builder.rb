@@ -11,11 +11,11 @@ module Formnestic
         formnestic_add_rows_counter_related_attributes
                       
         contents = [formtastic_semantic_fields_for(record_or_name_or_array, *args, &block)]
-        contents.push(formnestic_add_new_record_button_row(record_or_name_or_array, *args, &block)) if options[:row_addable]
+        contents.push(formnestic_add_new_record_button_row_for_table(record_or_name_or_array, *args, &block)) if options[:row_addable]
         options[:class] = ["formnestic-table-inputs formnestic-nested-model", options[:class]].compact.join(" ")
         options[:min_entry] ||= -1
         options[:max_entry] ||= -1      
-        options[:min_entry_alert_message] = formnestic_min_entry_alert_message(record_or_name_or_array)
+        options[:min_entry_alert_message] = formnestic_min_entry_alert_message(record_or_name_or_array, options[:min_entry])
                
         ### Finally, wrap everything inside a table tag
         template.content_tag(:table, [
@@ -41,20 +41,10 @@ module Formnestic
         end
       end
       
-      def formnestic_add_new_record_button_row(record_or_name_or_array, *args, &block)
-        return template.content_tag(:tr, template.content_tag(:td, formnestic_link_to_add_fields_with_content(record_or_name_or_array, *args, &block), {colspan: "100%"}), class: "formnestic-table-no-border")
+      def formnestic_add_new_record_button_row_for_table(record_or_name_or_array, *args, &block)
+        template.content_tag(:tr, template.content_tag(:td, formnestic_link_to_add_fields_with_content(record_or_name_or_array, *args, &block), {colspan: "100%"}), class: "formnestic-table-no-border")
       end
-      
-      def formnestic_min_entry_alert_message(record_or_name_or_array)
-        entity_name = I18n.t("activerecord.models.#{record_or_name_or_array.to_s.singularize}", default: record_or_name_or_array.to_s.singularize)
-        return options[:min_entry] != -1 ? (options[:min_entry_alert_message] ||
-               I18n.t('formnestic.labels.there_must_be_at_least_a_number_of_entries', {
-                 count: (options[:min_entry]), 
-                 entity_singular: entity_name, 
-                 entity_plural: entity_name.pluralize})) : ''
-        
-      end
-          
+                
       def formnestic_table_header(header_options, record_or_name_or_array)        
         association_name = record_or_name_or_array.is_a?(Array) ? record_or_name_or_array[0] : record_or_name_or_array
         thead_contents = if header_options[:thead]

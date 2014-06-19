@@ -1,0 +1,8 @@
+en:
+  formnestic:
+    labels:
+      remove_this_entry: Remove this entry
+      there_must_be_at_least_a_number_of_entries: 
+        one: "Unable to remove %{entity_singular}. There must be at least 1 %{entity_singular}"
+        other: "Unable to remove %{entity_singular}. There must be at least %{count} %{entity_plural}"
+      add_new_entry: "+ new entry"
