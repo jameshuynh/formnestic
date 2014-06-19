@@ -36,7 +36,7 @@ bundle exec rails g formnestic:install
 
 Assuming we have the following models:
 
-``rb
+```rb
 class QuizPool < ActiveRecord::Base
   attr_accessible :description, :title, :quiz_pool_questions_attributes
   
@@ -51,7 +51,7 @@ class QuizPoolQuestion < ActiveRecord::Base
   has_many :quiz_pool_question_options
   accepts_nested_attributes_for :quiz_pool_question_options
 end
-``
+```
 
 Then now we can write the following view to show a form contains ``quiz_pool`` attributes and nested form of ``quiz_pool_questions`` with the ability to add/remove questions.
 
@@ -98,12 +98,12 @@ will yield:
 
 Assuming now we have the following ``quiz_pool_question_option`` model:
 
-``rb
+```rb
 class QuizPoolQuestionOption < ActiveRecord::Base
   attr_accessible :description, :is_correct, :quiz_pool_question_id
   validates :description, presence: true  
 end
-``
+```
 
 Then now we can write the following view to show a table form contains ``quiz_pool_question`` attributes and nested form of ``quiz_pool_question_option`` with the ability to add/remove ``quiz_pool_question_option``.
 
