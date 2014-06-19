@@ -77,7 +77,7 @@ var Formnestic = {
 		listContainer.children().each(function() {
       var dom = $(this);
 			if(!dom.hasClass("formnestic-deleted-row")) {
-				dom.removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 == 0 ? "formnestic-even-row" : "formnestic-odd-row");
+				dom.removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 === 0 ? "formnestic-even-row" : "formnestic-odd-row");
         var counterDom = dom.find("span.formnestic-li-fieldset-for-order:first");
         counter = counter + 1;
         counterDom.html(counter);
@@ -91,7 +91,7 @@ var Formnestic = {
 		$(table).find("tbody:first").find("tr").each(function() {
       var trDom = $(this);
 			if(!trDom.hasClass('formnestic-deleted-row') && !trDom.hasClass("formnestic-table-no-border")) {
-				$(this).removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 == 0 ? "formnestic-even-row" : "formnestic-odd-row")
+				trDom.removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 === 0 ? "formnestic-even-row" : "formnestic-odd-row")
 				counter = counter + 1;
       }
 		});
