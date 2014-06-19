@@ -28,8 +28,8 @@ module Formnestic
         link_title = options[:new_record_link_label] || I18n.t("formnestic.labels.add_new_entry")        
         javascript_fn_to_call = options[:display_type] == 'table' ? 'addNewTableEntry' : 'addNewListEntry'
         
-        template.link_to_function(link_title, \
-          "Formnestic.#{javascript_fn_to_call}(this, \"#{record_or_name_or_array}\", \"#{escape_javascript(new_record_form_content)}\")", \
+        template.link_to(link_title, '#', onclick:
+          "Formnestic.#{javascript_fn_to_call}(this, \"#{record_or_name_or_array}\", \"#{escape_javascript(new_record_form_content)}\"); return false;", \
             "class" => ["formnestic-add-row-field-link", options[:new_record_link_class], (options[:max_entry] != -1 and rows_counter >= options[:max_entry]) ? "formnestic-hidden" : nil].compact.join(" "))
       
       end

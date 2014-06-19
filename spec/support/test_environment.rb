@@ -1,5 +1,5 @@
 # encoding: utf-8
-require 'rspec'
+# require 'rspec'
 require 'rspec_tag_matchers'
 
 RSpec.configure do |config|
@@ -17,6 +17,8 @@ module FormtasticTest
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
     config.active_support.deprecation = :stderr
+    config.secret_key_base = "secret"
+    config.eager_load = false
   end
 end
 FormtasticTest::Application.initialize!

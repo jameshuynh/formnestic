@@ -10,8 +10,7 @@ group :development, :test do
   gem "shoulda", ">= 0"
   gem "bundler", "~> 1.0"
   gem "jeweler", "~> 2.0.1"
-  gem 'rspec-rails', "~> 2.8.0"
-  gem 'ammeter', '0.2.2'
+  gem 'rspec-rails', '~> 2.14.0'
   gem 'rspec_tag_matchers', '>= 1.0.0'
   gem 'tzinfo'
   gem 'spork'
@@ -22,6 +21,6 @@ group :test do
   gem 'rake'
 end
 
-gem 'actionpack', "~> 3.0"
+gem 'actionpack'
 gem 'formtastic', "~> 2.2.1"
 # gem 'formtastic', path: '../formtastic'
