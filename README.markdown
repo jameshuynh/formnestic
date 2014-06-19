@@ -7,10 +7,7 @@ An extension of famous [Formtastic form builder ](https://github.com/justinfrenc
 
 ### Compatibility
 
-- Rails > 4.0
-  - [Sample project for Rails 4.1.1](https://github.com/jameshuynh/formnestic-sample-rails4)
-- Rails > 3.2
-  - [Sample project for Rails 3.2](https://github.com/jameshuynh/formnestic-sample-rails3)
+- Formnestic gem is Rails 3 and Rails 4 compatible
 
 ### Installation
 
@@ -75,11 +72,13 @@ See the usage for each of Rails version below for more details
 
 #### Rails 3 Usage
 
-[Usage & Guideline](https://github.com/jameshuynh/formnestic/wiki/Rails-3-Guideline-and-Usage)
+- [Usage & Guideline](https://github.com/jameshuynh/formnestic/wiki/Rails-3-Guideline-and-Usage)
+- [Sample project for Rails 3.2](https://github.com/jameshuynh/formnestic-sample-rails3)
 
 #### Rails 4 Usage
 
-[Usage & Guideline](https://github.com/jameshuynh/formnestic/wiki/Rails-4-Guideline-and-Usage)
+- [Usage & Guideline](https://github.com/jameshuynh/formnestic/wiki/Rails-4-Guideline-and-Usage)
+- [Sample project](https://github.com/jameshuynh/formnestic-sample-rails4)
 
 ### Roadmap to version 2.0
 
