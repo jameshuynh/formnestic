@@ -19,7 +19,7 @@ module Formnestic
         self.options[:parent_builder].increase_rows_counter
                         
         rows_counter = template.content_tag(:span, self.options[:parent_builder].rows_counter, class: "formnestic-li-fieldset-for-order")
-        content_div_content = [formnestic_legend_for_list_form, "&nbsp;#".html_safe, rows_counter].join
+        content_div_content = [formnestic_legend_for_list_form, "&nbsp;#".html_safe, rows_counter].join.html_safe
         title_div = template.content_tag(:div, content_div_content, class: "formnestic-li-fieldset-legend")        
         template.content_tag(:fieldset, title_div + (options[:row_removable] ? formnestic_row_removing_cell_for_list : '') + template.capture(&block), html_options)
       end
