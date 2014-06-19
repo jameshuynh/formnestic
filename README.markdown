@@ -94,7 +94,7 @@ See the usage for each of Rails version below for more details
 
 ## Credits
 
-- Big thanks to Justin French for bringing [Formtastic](https://github.com/justinfrench/formtastic) to our lives. It has enabled us to effectively code form much easier in rails and has enabled this gem to happen.
+- Big thanks to [Justin French](https://github.com/justinfrench) for bringing [Formtastic](https://github.com/justinfrench/formtastic) to our lives. It has enabled us to effectively code form much easier in rails and has enabled this gem to happen.
 
 ## Copyright
 
