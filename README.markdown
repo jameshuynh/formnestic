@@ -74,7 +74,7 @@ See the usage for each of Rails version below for more details
 #### Rails 3 Usage
 
 - [Usage & Guideline](https://github.com/jameshuynh/formnestic/wiki/Rails-3-Guideline-and-Usage)
-- [Sample project for Rails 3.2](https://github.com/jameshuynh/formnestic-sample-rails3)
+- [Sample project for Rails 3.2.18](https://github.com/jameshuynh/formnestic-sample-rails3)
 
 #### Rails 4 Usage
 
