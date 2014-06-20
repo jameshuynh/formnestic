@@ -4,13 +4,16 @@ module Formnestic
       include Formnestic::FormBuilder::BaseBuilder
       
       def formnestic_table_semantic_fields_for(record_or_name_or_array, *args, &block)
-        options = args.dup.extract_options!
-        options[:parent_builder] ||= self 
-        
+        options = args.dup.extract_options!                
         formnestic_add_table_headers_form_attributes
         formnestic_add_rows_counter_related_attributes
-                      
-        contents = [formtastic_semantic_fields_for(record_or_name_or_array, *args, &block)]
+        
+        child_form_builder = nil
+        contents = [formtastic_semantic_fields_for(record_or_name_or_array, *args, &lambda {|nested_form_builder|
+          child_form_builder = nested_form_builder
+          block.call(nested_form_builder)
+        })]
+        
         contents.push(formnestic_add_new_record_button_row_for_table(record_or_name_or_array, *args, &block)) if options[:row_addable]
         options[:class] = ["formnestic-table-inputs formnestic-nested-model", options[:class]].compact.join(" ")
         options[:min_entry] ||= -1
@@ -19,10 +22,10 @@ module Formnestic
                
         ### Finally, wrap everything inside a table tag
         template.content_tag(:table, [
-            formnestic_table_header(options, record_or_name_or_array), # table header
+            formnestic_table_header(options, record_or_name_or_array, child_form_builder), # table header
             template.content_tag(:tbody, Formtastic::Util.html_safe(contents.join)) # table body
           ].join.html_safe,
-          options.except(:builder, :parent, :name, :parent_builder, :display_type, :row_removable, :new_record_link_label)
+          options.except(:builder, :parent, :name, :parent_builder, :display_type, :row_removable, :new_record_link_label, :table_headers)
         )
       end
     
@@ -45,10 +48,10 @@ module Formnestic
         template.content_tag(:tr, template.content_tag(:td, formnestic_link_to_add_fields_with_content(record_or_name_or_array, *args, &block), {colspan: "100%"}), class: "formnestic-table-no-border")
       end
                 
-      def formnestic_table_header(header_options, record_or_name_or_array)        
+      def formnestic_table_header(header_options, record_or_name_or_array, child_form_builder)        
         association_name = record_or_name_or_array.is_a?(Array) ? record_or_name_or_array[0] : record_or_name_or_array
-        thead_contents = if header_options[:thead]
-          formnestic_thead_contents_from_arguments(header_options[:thead])
+        thead_contents = if header_options[:table_headers]
+          formnestic_thead_contents_from_arguments(header_options[:table_headers], record_or_name_or_array, child_form_builder)
         else
           formnestic_thead_contents_from_inputs(header_options[:row_removable])
         end        
@@ -64,12 +67,21 @@ module Formnestic
         [template.content_tag(:tr, tr_content_arr.join.html_safe)]
       end
       
-      def formnestic_thead_contents_from_arguments(theads)
+      def formnestic_thead_contents_from_arguments(theads, record_or_name_or_array, child_form_builder)
         thead_contents = []
         theads.each do |el_arr|
     		  tr_content_arr = []
-    		  el_arr.each do |el|
-            tr_content_arr.push(template.content_tag(:th, el[:attr].blank? == false ? ::I18n.t("activerecord.attributes.#{association_name.to_s.singularize}.#{el[:attr]}") : "", el[:html_options]))
+    		  el_arr.each_with_index do |el, index|
+            wrapper_html_options = el[:wrapper_html] || {}
+            if el[:attr].present?
+              # we get string input to extract label
+              input_base = Formtastic::Inputs::StringInput.new(child_form_builder, "", record_or_name_or_array, child_form_builder.object, el[:attr], {})
+              tr_content_arr.push(template.content_tag(:th, input_base.label_text, wrapper_html_options))
+            elsif el[:label].present?
+              tr_content_arr.push(template.content_tag(:th, el[:label], wrapper_html_options))
+            else
+              tr_content_arr.push(template.content_tag(:th, "Column #{index + 1}", wrapper_html_options))
+            end
     		  end
     		  thead_contents.push(template.content_tag(:tr, tr_content_arr.join.html_safe))
     		end

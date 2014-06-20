@@ -62,6 +62,13 @@ describe 'Formnestic Table Form' do
     it 'must have a tag with onclick is addNewTableEntry javascript call' do
       output_buffer.should have_tag("form table.formnestic-table-inputs tr.formnestic-table-no-border a[@onclick*='Formnestic.addNewTableEntry']")
     end    
+    
+    it 'should have a th tags according to the fields specified in semantic_fields_for body' do
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Title/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Body/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Post date/)
+    end
+    
   end
   
   describe 'table formnestic with row_removable=false and row_addable=true' do
@@ -143,6 +150,128 @@ describe 'Formnestic Table Form' do
     
     it "must not have is new text in boolean input" do
       output_buffer.should_not have_tag("form table.formnestic-table-inputs tbody label", "Recent")
+    end
+  end
+  
+  describe 'table formnestic with time field' do
+    before do
+      @output_buffer = ''
+      mock_everything   
+    
+      concat(semantic_form_for(@alan) do |builder|
+        concat(builder.semantic_fields_for(:posts, :display_type => "table", row_removable: true, row_addable: true, new_record_link_label: "Add new option") do |post_builder|
+          concat(post_builder.inputs do
+            concat(post_builder.input :post_date, as: :time_select)
+          end)
+        end)
+      end)
+    end
+    
+    it 'must not have label tag inside a time cell' do
+      output_buffer.should_not have_tag('form table.formnestic-table-inputs tbody td.time_select label')
+    end
+  end
+  
+  describe 'table formnestic with simple headers' do
+    before do
+      @output_buffer = ''
+      mock_everything   
+    
+      concat(semantic_form_for(@alan) do |builder|
+        concat(builder.semantic_fields_for(:posts, :display_type => "table", row_removable: true, row_addable: true, new_record_link_label: "Add new option", table_headers: [[{attr: :title}, {attr: :body, wrapper_html: {class: "body-th"}}, {attr: :post_date}]]) do |post_builder|
+          concat(post_builder.inputs do
+            concat(post_builder.input :title)
+            concat(post_builder.input :body)
+            concat(post_builder.input :post_date, as: :date_select)            
+          end)
+        end)
+      end)
+    end
+    
+    it 'should have a th tags according to specified in table headers' do
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Title/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Body/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Post date/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th.body-th', count: 1)
+    end
+  end
+  
+  describe 'table formnestic with headers but specified with label' do
+    before do
+      @output_buffer = ''
+      mock_everything   
+    
+      concat(semantic_form_for(@alan) do |builder|
+        concat(builder.semantic_fields_for(:posts, :display_type => "table", row_removable: true, row_addable: true, new_record_link_label: "Add new option", table_headers: [[{label: "My Title"}, {label: "My Body"}, {label: "Post Date"}]]) do |post_builder|
+          concat(post_builder.inputs do
+            concat(post_builder.input :title)
+            concat(post_builder.input :body)
+            concat(post_builder.input :post_date, as: :date_select)            
+          end)
+        end)
+      end)
+    end
+    
+    it 'should have a th tags according to specified in table headers' do
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^My Title/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^My Body/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Post Date/)
+    end
+  end
+  
+  describe 'table formnestic 2 rows header' do
+    before do
+      @output_buffer = ''
+      mock_everything   
+    
+      concat(semantic_form_for(@alan) do |builder|
+        concat(builder.semantic_fields_for(:posts, :display_type => "table", row_removable: true, row_addable: true, new_record_link_label: "Add new option", table_headers: [
+            [{attr: :title}, {attr: :body}, {attr: :post_date}], 
+            [{label: "My Title"}, {label: "My Body"}, {label: "Post Date"}]
+          ]) do |post_builder|
+          concat(post_builder.inputs do
+            concat(post_builder.input :title)
+            concat(post_builder.input :body)
+            concat(post_builder.input :post_date, as: :date_select)            
+          end)
+        end)
+      end)
+    end
+    
+    it 'should have a th tags according to specified in table headers' do
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Title/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Body/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Post date/)      
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^My Title/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^My Body/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Post Date/)
+    end
+  end
+  
+  describe 'table formnestic with table header with colspan specified' do
+    before do
+      @output_buffer = ''
+      mock_everything   
+    
+      concat(semantic_form_for(@alan) do |builder|
+        concat(builder.semantic_fields_for(:posts, :display_type => "table", row_removable: true, row_addable: true, new_record_link_label: "Add new option", table_headers: [
+            [{label: "All my columns", :wrapper_html => {colspan: 3}}],
+            [{attr: :title}, {attr: :body}, {attr: :post_date}]            
+          ]) do |post_builder|
+          concat(post_builder.inputs do
+            concat(post_builder.input :title)
+            concat(post_builder.input :body)
+            concat(post_builder.input :post_date, as: :date_select)            
+          end)
+        end)
+      end)
+    end
+    
+    it 'should have a th tags according to specified in table headers' do
+      output_buffer.should have_tag("form table.formnestic-table-inputs thead tr th[colspan='3']", /All my columns/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Title/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Body/)
+      output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Post date/)
     end
   end
 end

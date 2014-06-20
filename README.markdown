@@ -41,6 +41,16 @@ Basically, you can now add the following options into ``semantic_fields_for`` ca
 - ``min_entry``: Minimum number of nested model entries that is allowed. An alert will be shown if user tries to delete the last entry that meets this minumum number.
 - ``max_entry``: Maximum number of nested model entries that is allowed. Add button will be hidden if user has already added enough entries.
 - ``new_record_link_label``: The label to be displayed in the Add button.
+- ``table_headers``: A two(2) dimensional arrays, in which each array is presenting a row in table header row. For instance:
+
+```rb
+[
+  [{label: 'Column 1', wrapper_html: {class: "big-column"}}, {label: 'Column 2'}],
+  [{attr: :name}, {attr: :description}],
+]
+```
+
+will yield a table header with 2 rows. The first row has 2 columns labeled ``Column 1`` and ``Column 2`` respectively, the second row labelled respected attribute's name of the nested model.
 
 The form view is the same between Rails 3 and Rails 4
 

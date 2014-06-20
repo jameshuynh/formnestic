@@ -1,3 +1,9 @@
+PATH
+  remote: ../formtastic
+  specs:
+    formtastic (2.3.0.rc3)
+      actionpack (>= 3.2.13)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -25,8 +31,6 @@ GEM
     erubis (2.7.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    formtastic (2.2.1)
-      actionpack (>= 3.0)
     git (1.2.7)
     github_api (0.11.3)
       addressable (~> 2.3)
@@ -121,7 +125,7 @@ PLATFORMS
 DEPENDENCIES
   actionpack (>= 3.2.13)
   bundler (~> 1.0)
-  formtastic (~> 2.2.1)
+  formtastic!
   jeweler (~> 2.0.1)
   rake
   rdoc (~> 3.4)

@@ -24,3 +24,8 @@ watch("lib/(.*/.*)\.rb") do |match|
   run_spec "spec/helpers/nested_model_list_helper_spec.rb"
   run_spec "spec/helpers/nested_model_helper_spec.rb"
 end
+
+watch("lib/.*\.rb") do |match|
+  run_spec "spec/helpers/nested_model_list_helper_spec.rb"
+  run_spec "spec/helpers/nested_model_helper_spec.rb"
+end
