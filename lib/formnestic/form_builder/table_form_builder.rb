@@ -72,21 +72,23 @@ module Formnestic
         theads.each do |el_arr|
     		  tr_content_arr = []
     		  el_arr.each_with_index do |el, index|
-            wrapper_html_options = el[:wrapper_html] || {}
-            if el[:attr].present?
-              # we get string input to extract label
-              input_base = Formtastic::Inputs::StringInput.new(child_form_builder, "", record_or_name_or_array, child_form_builder.object, el[:attr], {})
-              tr_content_arr.push(template.content_tag(:th, input_base.label_text, wrapper_html_options))
-            elsif el[:label].present?
-              tr_content_arr.push(template.content_tag(:th, el[:label], wrapper_html_options))
-            else
-              tr_content_arr.push(template.content_tag(:th, "Column #{index + 1}", wrapper_html_options))
-            end
+            tr_content_arr.push(template.content_tag(:th, formnestic_table_thead_th_content(record_or_name_or_array, el, index + 1, child_form_builder), el[:wrapper_html] || {}))
     		  end
     		  thead_contents.push(template.content_tag(:tr, tr_content_arr.join.html_safe))
     		end
         thead_contents
       end
-    end
+      
+      def formnestic_table_thead_th_content(record_or_name_or_array, table_header_element_opts, position, child_form_builder)
+        if table_header_element_opts[:attr].present?
+          input_base = Formtastic::Inputs::StringInput.new(child_form_builder, "", record_or_name_or_array, child_form_builder.object, table_header_element_opts[:attr], {})
+          return input_base.label_text
+        elsif table_header_element_opts[:label].present?
+          return table_header_element_opts[:label]
+        else
+          return "Column #{position}"
+        end
+      end
+    end    
   end
 end

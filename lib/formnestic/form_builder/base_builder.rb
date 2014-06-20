@@ -35,12 +35,20 @@ module Formnestic
         new_record_form_options[:child_index] = "new_#{record_or_name_or_array}"
         new_record_form_content = formtastic_semantic_fields_for(record_or_name_or_array, *(duplicate_args << new_record_form_options), &block)
         link_title = options[:new_record_link_label] || I18n.t("formnestic.labels.add_new_entry")        
-        javascript_fn_to_call = options[:display_type] == 'table' ? 'addNewTableEntry' : 'addNewListEntry'
+        javascript_fn_to_call = js_call_for_nested_model_display_type(options[:display_type])
         
         template.link_to(link_title, '#', onclick:
           "Formnestic.#{javascript_fn_to_call}(this, \"#{record_or_name_or_array}\", \"#{escape_javascript(new_record_form_content)}\"); return false;", \
             "class" => ["formnestic-add-row-field-link", options[:new_record_link_class], (options[:max_entry] != -1 and rows_counter >= options[:max_entry]) ? "formnestic-hidden" : nil].compact.join(" "))
       
+      end
+      
+      def js_call_for_nested_model_display_type(display_type)
+        if display_type == 'table'
+          return 'addNewTableEntry'
+        else
+          return 'addNewListEntry'
+        end
       end
     end
   end
