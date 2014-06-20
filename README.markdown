@@ -15,7 +15,7 @@ An extension of famous [Formtastic Form Builder](https://github.com/justinfrench
 Add Formnestic to your Gemfile and run ``bundle install``:
 
 ```ruby
-gem "formnestic", '~> 1.0.0'
+gem "formnestic", '~> 1.0.1'
 ```
 
 then run the installation

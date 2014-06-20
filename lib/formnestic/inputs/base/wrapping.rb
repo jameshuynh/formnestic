@@ -42,7 +42,7 @@ module Formnestic
         def select_input_wrapping(&block)
           self.builder.options[:parent_builder].add_table_header(self.attributized_method_name, self.class, label_text)
           template.content_tag(:td, 
-            [template.capture(&block), error_html, hint_html, extra_input_for_other_in_select].join("\n").html_safe, 
+            [template.capture(&block), error_html, hint_html].join("\n").html_safe, 
             wrapper_html_options
           )
         end          

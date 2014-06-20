@@ -97,20 +97,30 @@ table.formnestic-table-inputs tbody tr.inputs {
     p.inline-hints {
       margin-left: 0;
     }
+    
+    ol.choices-group {
+      padding-left: 0;
+    }
   }
   &.formnestic-odd-row td {
     background: #eee;
   }
   
   &.formnestic-even-row td {
-  }  
+  }
 }
 
-table.formnestic-table-inputs td.date_select ol.fragments-group {
+table.formnestic-table-inputs td.date_select ol.fragments-group, 
+table.formnestic-table-inputs td.time_select ol.fragments-group,
+table.formnestic-table-inputs td.datetime ol.fragments-group, 
+table.formnestic-table-inputs td.datetime_select ol.fragments-group,
+table.formnestic-table-inputs td.date ol.fragments-group, 
+table.formnestic-table-inputs td.time ol.fragments-group {
   list-style-type: none;
+  padding-left: 0;
 }
 
-table.formnestic-table-inputs td.date_select ol.fragments-group li.fragment {
+table.formnestic-table-inputs td.date_select ol.fragments-group li.fragment, table.formnestic-table-inputs td.date ol.fragments-group li.fragment {
   float: left;
   margin-right: 5px;
 }
