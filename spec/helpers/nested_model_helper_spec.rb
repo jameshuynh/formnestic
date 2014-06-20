@@ -274,4 +274,26 @@ describe 'Formnestic Table Form' do
       output_buffer.should have_tag('form table.formnestic-table-inputs thead tr th', /^Post date/)
     end
   end
+  
+  describe 'table formnestic with table header with select input specified' do
+    before do
+      @output_buffer = ''
+      mock_everything   
+    
+      concat(semantic_form_for(@alan) do |builder|
+        concat(builder.semantic_fields_for(:posts, :display_type => "table", row_removable: true, row_addable: true, new_record_link_label: "Add new option", table_headers: [
+            [{label: "All my columns", :wrapper_html => {colspan: 3}}],
+            [{attr: :title}, {attr: :body}, {attr: :post_date}]            
+          ]) do |post_builder|
+          concat(post_builder.inputs do
+            concat(post_builder.input :title, as: :select, collection: ["a", "b", "c"])
+          end)
+        end)
+      end)
+    end
+    
+    it 'should have a 5 td tags - 2 columns for each of the 2 entries and another td for add new options link' do
+      output_buffer.should have_tag('form table.formnestic-table-inputs tbody tr td', :count => 5)
+    end
+  end
 end
