@@ -1,6 +1,9 @@
 # encoding: utf-8
 
 require 'rubygems'
+require 'coveralls'
+Coveralls.wear!
+
 require 'spork'
 require 'bundler/setup'
 require 'active_support'

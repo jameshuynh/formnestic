@@ -24,4 +24,5 @@ end
 
 gem 'actionpack', '>= 3.2.13'
 gem 'formtastic', "~> 2.2.1"
+gem 'coveralls', require: false
 # gem 'formtastic', path: '../formtastic'
