@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/jameshuynh/formnestic.svg?branch=master)](https://travis-ci.org/jameshuynh/formnestic)
 [![Code Climate](https://codeclimate.com/github/jameshuynh/formnestic.png)](https://codeclimate.com/github/jameshuynh/formnestic)
 
-An extension of famous [Formtastic form builder ](https://github.com/justinfrench/formtastic) to make building nested and association form extremely simple
+An extension of famous [Formtastic Form Builder](https://github.com/justinfrench/formtastic) to make building nested and association form with nested model addable and removable ability extremely easy and simple.
 
 ### Compatibility
 

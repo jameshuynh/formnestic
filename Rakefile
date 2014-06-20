@@ -19,7 +19,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/jameshuynh/formnestic"
   gem.license = "MIT"
   gem.summary = %Q{An extension of formtastic form builder gem}
-  gem.description = %Q{An extension of formtastic form builder gem to aids in building nested or association form}
+  gem.description = %Q{An extension of famous Formtastic Form Builder to make building nested and association form with nested model addable and removable ability extremely easy and simple}
   gem.email = "james@rubify.com"
   gem.authors = ["James"]
   gem.version = File.exist?('VERSION') ? File.read('VERSION') : ""
