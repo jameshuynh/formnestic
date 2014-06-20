@@ -26,7 +26,7 @@ Jeweler::Tasks.new do |gem|
   gem.files.exclude 'screenshots'
   # dependencies defined in Gemfile
 end
-# Jeweler::RubygemsDotOrgTasks.new
+Jeweler::RubygemsDotOrgTasks.new
 
 desc 'Test the formtastic plugin.'
 RSpec::Core::RakeTask.new('spec') do |t|
