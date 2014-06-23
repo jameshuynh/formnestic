@@ -13,11 +13,7 @@ module Formnestic
       
       # for listing form
       def formnestic_list_row_inputs(*args, &block)
-        html_options = args.extract_options!
-        html_options[:name] = field_set_title_from_args(*args)
-        html_options[:class] = [html_options[:class] || "inputs", "formnestic-li-fieldset", formnestic_row_class_based_on_position(options[:parent_builder].rows_counter)].join(" ")        
-        self.options[:parent_builder].increase_rows_counter
-                        
+        html_options = formnestic_prepare_html_options_for_wrapper(:list, *args)
         rows_counter = template.content_tag(:span, self.options[:parent_builder].rows_counter, class: "formnestic-li-fieldset-for-order")
         content_div_content = [formnestic_legend_for_list_form, "&nbsp;#".html_safe, rows_counter].join.html_safe
         title_div = template.content_tag(:div, content_div_content, class: "formnestic-li-fieldset-legend")        
@@ -26,11 +22,7 @@ module Formnestic
       
       # For table form
       def formnestic_table_row_inputs(*args, &block)
-        html_options = args.extract_options!
-        html_options[:name] = field_set_title_from_args(*args)
-        html_options[:class] = [html_options[:class] || "inputs", "formnestic-tr-fieldset", formnestic_row_class_based_on_position(options[:parent_builder].rows_counter)].join(" ")
-                
-        self.options[:parent_builder].increase_rows_counter
+        html_options = formnestic_prepare_html_options_for_wrapper(:table, *args)
         template.content_tag(:tr, [template.capture(&block), (options[:row_removable] ?
 formnestic_row_removing_content_tag(:table) : '')].join.html_safe, html_options)
       end
@@ -48,6 +40,22 @@ formnestic_row_removing_content_tag(:table) : '')].join.html_safe, html_options)
         template.content_tag(form_type == :table ? :td : :div, contents.join.html_safe, class: formnestic_row_removing_cell_container_div_class(form_type))
       end
       
+      def formnestic_prepare_html_options_for_wrapper(form_type, *args)
+        html_options = args.extract_options!
+        html_options[:name] = field_set_title_from_args(*args)
+        html_options[:class] = [html_options[:class] || "inputs", formnestic_wrapper_class(form_type), formnestic_row_class_based_on_position(options[:parent_builder].rows_counter)].join(" ")
+        self.options[:parent_builder].increase_rows_counter  
+        return html_options      
+      end
+      
+      def formnestic_wrapper_class(form_type)
+        if form_type == :table
+          'formnestic-tr-fieldset'
+        else
+          'formnestic-li-fieldset'
+        end
+      end
+        
       def formnestic_row_removing_cell_js_call(form_type)
         if form_type == :table
           'Formnestic.removeATableEntry(this);'
@@ -75,6 +83,7 @@ formnestic_row_removing_content_tag(:table) : '')].join.html_safe, html_options)
       def formnestic_row_class_based_on_position(position)
         position % 2 == 0 ? 'formnestic-even-row': 'formnestic-odd-row'
       end
+      
       
       
     end

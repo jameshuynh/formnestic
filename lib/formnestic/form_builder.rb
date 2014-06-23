@@ -1,5 +1,5 @@
 module Formnestic
-  module FormBuilder    
+  module FormBuilder
     include ActionView::Helpers::JavaScriptHelper
     
     autoload :BaseBuilder, File.join(File.dirname(__FILE__), 'form_builder', 'base_builder')

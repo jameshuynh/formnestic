@@ -32,7 +32,7 @@ var Formnestic = {
     var maxNumberOfEntries = parseInt(nestedModelContainer.attr("max_entry"), 10);    
     
     if (minNumberOfEntries !== -1 && numberOfShowingEntries <= minNumberOfEntries) {
-      return alert(nestedModelContainer.attr("min_entry_alert_message"));
+      return window.alert(nestedModelContainer.attr("min_entry_alert_message"));
     }//end if
     
     var entryContainer = deleteEntryLinkDom.parents("fieldset.inputs:first");
@@ -46,7 +46,7 @@ var Formnestic = {
       addRowLinkContainer.removeClass("formnestic-hidden");
     }//end else
     
-    entryContainer.fadeOut(function() {});
+    entryContainer.fadeOut();
   },
   
   removeATableEntry: function(deleteEntryLinkDom) {
@@ -57,7 +57,7 @@ var Formnestic = {
     var minNumberOfEntries = parseInt(table.attr("min_entry"), 10);
     var maxNumberOfEntries = parseInt(table.attr("max_entry"), 10);    
     if (minNumberOfEntries !== -1 && numberOfShowingEntries <= minNumberOfEntries) {
-        return alert(table.attr("min_entry_alert_message"));
+        return window.alert(table.attr("min_entry_alert_message"));
     }//end if
     
     var trContainer = deleteEntryLinkDom.parents("tr:first");
@@ -69,7 +69,7 @@ var Formnestic = {
     } else {
       addRowLink.removeClass("formnestic-hidden");
     }//end else
-    trContainer.fadeOut(function() {});
+    trContainer.fadeOut();
   },
   
   addOddAndEventClassForListContainer: function(listContainer) {
@@ -91,7 +91,7 @@ var Formnestic = {
 		$(table).find("tbody:first").find("tr").each(function() {
       var trDom = $(this);
 			if(!trDom.hasClass('formnestic-deleted-row') && !trDom.hasClass("formnestic-table-no-border")) {
-				trDom.removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 === 0 ? "formnestic-even-row" : "formnestic-odd-row")
+				trDom.removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 === 0 ? "formnestic-even-row" : "formnestic-odd-row");
 				counter = counter + 1;
       }
 		});
@@ -100,14 +100,12 @@ var Formnestic = {
   },
   
   addNewListEntry: function(linkDom, associationName, content) {
-    var newId = new Date().getTime();
-    var regexp = new RegExp("new_" + associationName, "g");
     var linkDomContainer = $(linkDom).parent();
     var listContainer = linkDomContainer.parents('div.formnestic-nested-model-container:first').find("div.formnestic-list-entries-container");
     var nestedModelContainer = listContainer.parent();
     var maxNumberOfEntries = parseInt(nestedModelContainer.attr('max_entry'), 10);
     
-    var entryContainer = $(content.replace(regexp, newId)).appendTo(listContainer);
+    var entryContainer = $(this.formatNewAppendedContent(content, associationName)).appendTo(listContainer);
     var counter = this.addOddAndEventClassForListContainer(listContainer);
     if (maxNumberOfEntries !== -1 && counter >= maxNumberOfEntries) {
       linkDomContainer.addClass("formnestic-hidden");
@@ -119,12 +117,10 @@ var Formnestic = {
   },
   
   addNewTableEntry: function(linkDom, associationName, content) {
-    var newId = new Date().getTime();
-    var regexp = new RegExp("new_" + associationName, "g");
     var linkDomjQuery = $(linkDom);
     var table = linkDomjQuery.parents('table:first');
     
-    var entryContainer = $(content.replace(regexp, newId)).insertBefore(linkDomjQuery.parents("tr:first"));
+    var entryContainer = $(this.formatNewAppendedContent(content, associationName)).insertBefore(linkDomjQuery.parents("tr:first"));
       
     var counter = this.addOddAndEvenClassForTable(table);
     var maxNumberOfEntries = parseInt(table.attr('max_entry'), 10);
@@ -135,5 +131,11 @@ var Formnestic = {
     }//end else
     
     entryContainer.css({display: 'none'}).fadeIn();
+  },
+  
+  formatNewAppendedContent: function(content, associationName) {
+    var newId = new Date().getTime();
+    var regexp = new RegExp("new_" + associationName, "g");
+    return content.replace(regexp, newId);
   }
 };
