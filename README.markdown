@@ -8,7 +8,7 @@ An extension of famous [Formtastic Form Builder](https://github.com/justinfrench
 
 ### Compatibility
 
-- Formnestic gem requires ``formtastic`` gem version ``2.2.1``
+- Formnestic gem requires ``formtastic`` gem version ``>= 2.2.1``
 - Formnestic gem is Rails 3 and Rails 4 compatible
 
 ### Installation
