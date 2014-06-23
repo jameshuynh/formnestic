@@ -74,7 +74,7 @@ var Formnestic = {
   
   addOddAndEventClassForListContainer: function(listContainer) {
 		var counter = 0;
-		listContainer.children().each(function() {
+		listContainer.children("fieldset").each(function() {
       var dom = $(this);
 			if(!dom.hasClass("formnestic-deleted-row")) {
 				dom.removeClass("formnestic-odd-row formnestic-even-row").addClass(counter % 2 === 0 ? "formnestic-even-row" : "formnestic-odd-row");
