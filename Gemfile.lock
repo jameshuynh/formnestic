@@ -140,7 +140,7 @@ DEPENDENCIES
   actionpack (>= 3.2.13)
   bundler (~> 1.0)
   coveralls
-  formtastic (~> 2.2.1)
+  formtastic (>= 2.2.1)
   jeweler (~> 2.0.1)
   rake
   rdoc (~> 3.4)
