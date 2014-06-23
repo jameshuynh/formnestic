@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "formnestic"
-  s.version = "1.0.1"
+  s.version = "1.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["James"]
-  s.date = "2014-06-20"
+  s.date = "2014-06-23"
   s.description = "An extension of famous Formtastic Form Builder to make building nested and association form with nested model addable and removable ability extremely easy and simple"
   s.email = "james@rubify.com"
   s.extra_rdoc_files = [
@@ -73,6 +73,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<actionpack>, [">= 3.2.13"])
       s.add_runtime_dependency(%q<formtastic>, [">= 2.2.1"])
+      s.add_runtime_dependency(%q<coveralls>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.4"])
@@ -85,6 +86,7 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<actionpack>, [">= 3.2.13"])
       s.add_dependency(%q<formtastic>, [">= 2.2.1"])
+      s.add_dependency(%q<coveralls>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.4"])
@@ -98,6 +100,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<actionpack>, [">= 3.2.13"])
     s.add_dependency(%q<formtastic>, [">= 2.2.1"])
+    s.add_dependency(%q<coveralls>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.4"])
