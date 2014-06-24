@@ -6,6 +6,8 @@
 
 An extension of famous [Formtastic Form Builder](https://github.com/justinfrench/formtastic) to make building nested and association form with nested model addable and removable ability extremely easy and simple.
 
+Checkout the the [Demo](http://formnestic-demo.herokuapp.com)
+
 ### Compatibility
 
 - Formnestic gem requires ``formtastic`` gem version ``>= 2.2.1``
