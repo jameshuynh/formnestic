@@ -4,7 +4,7 @@ module Formnestic
       extend ActiveSupport::Autoload
       autoload :Wrapping
       autoload :Labelling
-      
+
       include Wrapping
       include Labelling
     end
