@@ -4,112 +4,111 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "formnestic"
-  s.version = "1.0.4"
+  s.name = 'formnestic'
+  s.version = '1.0.5'
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["James"]
-  s.date = "2018-04-12"
-  s.description = "An extension of famous Formtastic Form Builder to make building nested and association form with nested model addable and removable ability extremely easy and simple"
-  s.email = "james@rubify.com"
+  s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
+  s.authors = ['James']
+  s.date = '2018-04-12'
+  s.description = 'An extension of famous Formtastic Form Builder to make building nested and association form with nested model addable and removable ability extremely easy and simple'
+  s.email = 'james@rubify.com'
   s.extra_rdoc_files = [
-    "README.markdown"
+    'README.markdown'
   ]
   s.files = [
-    ".document",
-    ".rspec",
-    ".travis.yml",
-    ".watchr",
-    "Gemfile",
-    "Gemfile.lock",
-    "MIT-LICENSE",
-    "README.markdown",
-    "Rakefile",
-    "VERSION",
-    "app/assets/.DS_Store",
-    "app/assets/javascripts/formnestic/formnestic.js",
-    "app/assets/stylesheets/formnestic/entypo.css.scss",
-    "app/assets/stylesheets/formnestic/entypo.eot",
-    "app/assets/stylesheets/formnestic/entypo.svg",
-    "app/assets/stylesheets/formnestic/entypo.ttf",
-    "app/assets/stylesheets/formnestic/entypo.woff",
-    "app/assets/stylesheets/formnestic/formnestic.css.scss",
-    "config/locales/formnestic.en.yml",
-    "formnestic.gemspec",
-    "lib/formnestic.rb",
-    "lib/formnestic/form_builder.rb",
-    "lib/formnestic/form_builder/base_builder.rb",
-    "lib/formnestic/form_builder/list_form_builder.rb",
-    "lib/formnestic/form_builder/table_form_builder.rb",
-    "lib/formnestic/helpers.rb",
-    "lib/formnestic/helpers/inputs_helper.rb",
-    "lib/formnestic/inputs.rb",
-    "lib/formnestic/inputs/base.rb",
-    "lib/formnestic/inputs/base/labelling.rb",
-    "lib/formnestic/inputs/base/wrapping.rb",
-    "lib/generators/formnestic/install_generator.rb",
-    "log/development.log",
-    "rwatchr",
-    "screenshots/list_form.png",
-    "screenshots/table_form.png",
-    "spec/helpers/nested_model_helper_spec.rb",
-    "spec/helpers/nested_model_list_helper_spec.rb",
-    "spec/inputs/boolean_input_spec.rb",
-    "spec/spec_helper.rb",
-    "spec/support/custom_macros.rb",
-    "spec/support/deferred_garbage_collection.rb",
-    "spec/support/deprecation.rb",
-    "spec/support/test_environment.rb"
+    '.document',
+    '.rspec',
+    '.travis.yml',
+    '.watchr',
+    'Gemfile',
+    'Gemfile.lock',
+    'MIT-LICENSE',
+    'README.markdown',
+    'Rakefile',
+    'VERSION',
+    'app/assets/.DS_Store',
+    'app/assets/javascripts/formnestic/formnestic.js',
+    'app/assets/stylesheets/formnestic/entypo.css.scss',
+    'app/assets/stylesheets/formnestic/entypo.eot',
+    'app/assets/stylesheets/formnestic/entypo.svg',
+    'app/assets/stylesheets/formnestic/entypo.ttf',
+    'app/assets/stylesheets/formnestic/entypo.woff',
+    'app/assets/stylesheets/formnestic/formnestic.css.scss',
+    'config/locales/formnestic.en.yml',
+    'formnestic.gemspec',
+    'lib/formnestic.rb',
+    'lib/formnestic/form_builder.rb',
+    'lib/formnestic/form_builder/base_builder.rb',
+    'lib/formnestic/form_builder/list_form_builder.rb',
+    'lib/formnestic/form_builder/table_form_builder.rb',
+    'lib/formnestic/helpers.rb',
+    'lib/formnestic/engine.rb',
+    'lib/formnestic/formtastic_extensions.rb',
+    'lib/formnestic/helpers/inputs_helper.rb',
+    'lib/formnestic/inputs.rb',
+    'lib/formnestic/inputs/base.rb',
+    'lib/formnestic/inputs/base/labelling.rb',
+    'lib/formnestic/inputs/base/wrapping.rb',
+    'lib/generators/formnestic/install_generator.rb',
+    'rwatchr',
+    'screenshots/list_form.png',
+    'screenshots/table_form.png',
+    'spec/helpers/nested_model_helper_spec.rb',
+    'spec/helpers/nested_model_list_helper_spec.rb',
+    'spec/inputs/boolean_input_spec.rb',
+    'spec/spec_helper.rb',
+    'spec/support/custom_macros.rb',
+    'spec/support/deferred_garbage_collection.rb',
+    'spec/support/deprecation.rb',
+    'spec/support/test_environment.rb'
   ]
-  s.homepage = "http://github.com/jameshuynh/formnestic"
-  s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.23"
-  s.summary = "An extension of formtastic form builder gem"
+  s.homepage = 'http://github.com/jameshuynh/formnestic'
+  s.licenses = ['MIT']
+  s.require_paths = ['lib']
+  s.rubygems_version = '1.8.23'
+  s.summary = 'An extension of formtastic form builder gem'
 
-  if s.respond_to? :specification_version then
+  if s.respond_to? :specification_version
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<actionpack>, [">= 3.2.13"])
-      s.add_runtime_dependency(%q<formtastic>, [">= 2.2.1"])
-      s.add_runtime_dependency(%q<coveralls>, [">= 0"])
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0"])
-      s.add_development_dependency(%q<rdoc>, ["~> 3.4"])
-      s.add_development_dependency(%q<jeweler>, ["~> 2.0.1"])
-      s.add_development_dependency(%q<rspec-rails>, ["~> 2.14.0"])
-      s.add_development_dependency(%q<rspec_tag_matchers>, [">= 1.0.0"])
-      s.add_development_dependency(%q<tzinfo>, [">= 0"])
-      s.add_development_dependency(%q<spork>, [">= 0"])
-      s.add_development_dependency(%q<watchr>, [">= 0"])
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0')
+      s.add_runtime_dependency('actionpack', ['>= 3.2.13'])
+      s.add_runtime_dependency('coveralls', ['>= 0'])
+      s.add_runtime_dependency('formtastic', ['>= 2.2.1'])
+      s.add_development_dependency('bundler', ['~> 1.0'])
+      s.add_development_dependency('jeweler', ['~> 2.0.1'])
+      s.add_development_dependency('rdoc', ['~> 3.4'])
+      s.add_development_dependency('rspec-rails', ['~> 2.14.0'])
+      s.add_development_dependency('rspec_tag_matchers', ['>= 1.0.0'])
+      s.add_development_dependency('shoulda', ['>= 0'])
+      s.add_development_dependency('spork', ['>= 0'])
+      s.add_development_dependency('tzinfo', ['>= 0'])
     else
-      s.add_dependency(%q<actionpack>, [">= 3.2.13"])
-      s.add_dependency(%q<formtastic>, [">= 2.2.1"])
-      s.add_dependency(%q<coveralls>, [">= 0"])
-      s.add_dependency(%q<shoulda>, [">= 0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0"])
-      s.add_dependency(%q<rdoc>, ["~> 3.4"])
-      s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
-      s.add_dependency(%q<rspec-rails>, ["~> 2.14.0"])
-      s.add_dependency(%q<rspec_tag_matchers>, [">= 1.0.0"])
-      s.add_dependency(%q<tzinfo>, [">= 0"])
-      s.add_dependency(%q<spork>, [">= 0"])
-      s.add_dependency(%q<watchr>, [">= 0"])
+      s.add_dependency('actionpack', ['>= 3.2.13'])
+      s.add_dependency('bundler', ['~> 1.0'])
+      s.add_dependency('coveralls', ['>= 0'])
+      s.add_dependency('rdoc', ['~> 3.4'])
+      s.add_dependency('rdoc', ['~> 3.4'])
+      s.add_dependency('rdoc', ['~> 3.4'])
+      s.add_dependency('rspec-rails', ['~> 2.14.0'])
+      s.add_dependency('rspec_tag_matchers', ['>= 1.0.0'])
+      s.add_dependency('shoulda', ['>= 0'])
+      s.add_dependency('spork', ['>= 0'])
+      s.add_dependency('tzinfo', ['>= 0'])
+      s.add_dependency('watchr', ['>= 0'])
     end
   else
-    s.add_dependency(%q<actionpack>, [">= 3.2.13"])
-    s.add_dependency(%q<formtastic>, [">= 2.2.1"])
-    s.add_dependency(%q<coveralls>, [">= 0"])
-    s.add_dependency(%q<shoulda>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0"])
-    s.add_dependency(%q<rdoc>, ["~> 3.4"])
-    s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
-    s.add_dependency(%q<rspec-rails>, ["~> 2.14.0"])
-    s.add_dependency(%q<rspec_tag_matchers>, [">= 1.0.0"])
-    s.add_dependency(%q<tzinfo>, [">= 0"])
-    s.add_dependency(%q<spork>, [">= 0"])
-    s.add_dependency(%q<watchr>, [">= 0"])
+    s.add_dependency('formtastic', ['>= 2.2.1'])
+    s.add_dependency('formtastic', ['>= 2.2.1'])
+    s.add_dependency('formtastic', ['>= 2.2.1'])
+    s.add_dependency('jeweler', ['~> 2.0.1'])
+    s.add_dependency('shoulda', ['>= 0'])
+    s.add_dependency('shoulda', ['>= 0'])
+    s.add_development_dependency('watchr', ['>= 0'])
+    s.add_dependency('rspec-rails', ['~> 2.14.0'])
+    s.add_dependency('rspec_tag_matchers', ['>= 1.0.0'])
+    s.add_dependency('tzinfo', ['>= 0'])
+    s.add_dependency('tzinfo', ['>= 0'])
+    s.add_dependency('watchr', ['>= 0'])
   end
 end
-
