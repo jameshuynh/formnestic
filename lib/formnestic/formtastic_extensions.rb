@@ -1,3 +1,4 @@
+# rubocop:disable MethodLength, Documentation
 module Formnestic
   module FormtasticExtensions
     def extend_form_builder
@@ -45,16 +46,16 @@ module Formnestic
         :formtastic_render_label?,
         :render_label?
       )
-      # Formtastic::Inputs::BooleanInput.send(
-      #   :alias_method,
-      #   :formtastic_label_text_with_embedded_checkbox,
-      #   :label_text_with_embedded_checkbox
-      # )
       Formtastic::Inputs::Base.send(
         :include, Formnestic::Inputs::Base::Wrapping
       )
       Formtastic::Inputs::Base.send(
         :include, Formnestic::Inputs::Base::Labelling
+      )
+      Formtastic::Inputs::BooleanInput.send(
+        :alias_method,
+        :formtastic_label_text_with_embedded_checkbox,
+        :label_text_with_embedded_checkbox
       )
     end
 
