@@ -57,7 +57,7 @@ GEM
       rake
       rdoc
     journey (1.0.4)
-    json (1.8.1)
+    json (1.8.6)
     jwt (1.0.0)
     mime-types (2.3)
     mini_portile (0.6.0)
@@ -142,6 +142,7 @@ DEPENDENCIES
   coveralls
   formtastic (>= 2.2.1)
   jeweler (~> 2.0.1)
+  json (>= 1.8.3)
   rake
   rdoc (~> 3.4)
   rspec-rails (~> 2.14.0)
@@ -150,3 +151,6 @@ DEPENDENCIES
   spork
   tzinfo
   watchr
+
+BUNDLED WITH
+   1.15.4

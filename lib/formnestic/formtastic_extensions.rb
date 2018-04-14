@@ -88,7 +88,7 @@ module Formnestic
       Formtastic::Inputs::BooleanInput.class_eval do
         def label_text_with_embedded_checkbox
           if builder.options[:display_type] == 'table'
-            check_box_html
+            check_box_html << '' << template.content_tag(:span)
           else
             formtastic_label_text_with_embedded_checkbox
           end

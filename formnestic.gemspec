@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = 'formnestic'
-  s.version = '1.0.6'
+  s.version = '1.0.7'
 
   s.required_rubygems_version = Gem::Requirement.new('>= 0') if s.respond_to? :required_rubygems_version=
   s.authors = ['James']
-  s.date = '2018-04-12'
+  s.date = '2018-04-14'
   s.description = 'An extension of famous Formtastic Form Builder to make building nested and association form with nested model addable and removable ability extremely easy and simple'
   s.email = 'james@rubify.com'
   s.extra_rdoc_files = [
