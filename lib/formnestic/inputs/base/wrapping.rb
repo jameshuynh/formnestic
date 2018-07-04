@@ -1,9 +1,31 @@
+# rubocop:disable MethodLength, AbcSize
 module Formnestic
   module Inputs
     module Base
       module Wrapping
+        def table_builder?
+          builder.options[:display_type] == 'table' ||
+            if builder.options[:parent_builder]
+              builder
+                .options[:parent_builder]
+                .options[:display_type] == 'table'
+            else
+              false
+            end
+        end
+
+        def parent_table_builder?
+          if builder.options[:parent_builder]
+            builder
+              .options[:parent_builder]
+              .options[:display_type] == 'table'
+          else
+            false
+          end
+        end
+
         def input_wrapping(&block)
-          if builder.options[:display_type] == 'table'
+          if table_builder?
             if [
               'Formtastic::Inputs::DateSelectInput',
               'Formtastic::Inputs::TimeSelectInput',
@@ -21,13 +43,16 @@ module Formnestic
         end
 
         def table_date_select_input_wrapping(&block)
-          builder
-            .options[:parent_builder]
-            .add_table_header(
-              attributized_method_name,
-              self.class,
-              label_text
-            )
+          unless parent_table_builder?
+            builder
+              .options[:parent_builder]
+              .add_table_header(
+                attributized_method_name,
+                self.class,
+                label_text
+              )
+          end
+
           template.content_tag(
             :td,
             template.content_tag(
@@ -40,13 +65,15 @@ module Formnestic
         end
 
         def table_input_wrapping(&block)
-          builder
-            .options[:parent_builder]
-            .add_table_header(
-              attributized_method_name,
-              self.class,
-              label_text
-            )
+          unless parent_table_builder?
+            builder
+              .options[:parent_builder]
+              .add_table_header(
+                attributized_method_name,
+                self.class,
+                label_text
+              )
+          end
 
           template.content_tag(
             :td,
@@ -62,3 +89,4 @@ module Formnestic
     end
   end
 end
+# rubocop:enable MethodLength, AbcSize

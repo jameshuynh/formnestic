@@ -184,7 +184,7 @@ module Formnestic
             )
           input_base.label_text
         elsif table_header_element_opts[:label].present?
-          table_header_element_opts[:label]
+          table_header_element_opts[:label].html_safe
         else
           "Column #{position}"
         end
