@@ -22,8 +22,23 @@ module Formnestic
         end
       end
 
-      def formnestic_link_to_add_fields_with_content(record_or_name_or_array, *args, &block)
-        new_object = object.class.reflect_on_association(record_or_name_or_array).klass.new
+      def formnestic_link_to_add_fields_with_content(
+        record_or_name_or_array, *args, &block
+      )
+        relationship = object.class.reflections[record_or_name_or_array.to_s]
+        if relationship.nil?
+          raise "#{record_or_name_or_array} is not a \
+relationship of #{object.class}"
+        end
+
+        new_object =
+          if relationship.is_a?(
+            ActiveRecord::Reflection::HasManyReflection
+          )
+            object.public_send(record_or_name_or_array).build
+          else
+            relationship.klass.new
+          end
         options = args.dup.extract_options!
         options[:max_entry] ||= -1
         duplicate_args = args.dup
