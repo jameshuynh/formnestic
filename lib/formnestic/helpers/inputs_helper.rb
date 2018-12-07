@@ -28,9 +28,19 @@ formnestic_row_removing_content_tag(:table) : '')].join.html_safe, html_options)
       end
 
       def formnestic_legend_for_list_form
-        record_name = object.class.to_s.underscore.tr('_', ' ').singularize.downcase
-        entity_name = I18n.t("activerecord.models.#{object.class.to_s.underscore.downcase}", default: record_name)
-        template.content_tag(:span, record_name.titleize, class: 'formnestic-li-fieldset-for')
+        record_name = if options[:record_header].present?
+                        options[:record_header]
+                      else
+                        object
+                          .class
+                          .to_s
+                          .underscore
+                          .tr('_', ' ')
+                          .singularize
+                          .downcase
+                          .titleize
+                      end
+        template.content_tag(:span, record_name, class: 'formnestic-li-fieldset-for')
       end
 
       def formnestic_row_removing_content_tag(form_type)
