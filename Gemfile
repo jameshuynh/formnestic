@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'http://rubygems.org'
 # Add dependencies required to use your gem here.
 # Example:
@@ -16,6 +18,8 @@ group :development, :test do
   gem 'spork'
   gem 'tzinfo'
   gem 'watchr'
+
+  gem 'nokogiri', '~> 1.10'
 end
 
 group :test do

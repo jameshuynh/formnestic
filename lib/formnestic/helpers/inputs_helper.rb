@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable MethodLength, AbcSize, ModuleLength
 module Formnestic
   module Helpers
@@ -36,7 +38,20 @@ module Formnestic
           :fieldset, [
             title_div, (
               if options[:row_removable]
-                formnestic_row_removing_content_tag(:list)
+                row_removable_for_record =
+                  resolve_row_removable(options[:row_removable], object)
+                if row_removable_for_record
+                  formnestic_row_removing_content_tag(
+                    :list
+                  )
+                else
+                  template.content_tag(
+                    :div,
+                    '',
+                    class: \
+                      formnestic_row_removing_cell_container_div_class(:list)
+                  )
+                end
               else
                 ''
               end
@@ -54,14 +69,36 @@ module Formnestic
         template.content_tag(
           :tr, [
             template.capture(&block), (
-              if options[:row_removable]
-                formnestic_row_removing_content_tag(:table)
+              if options[:row_removable] != false
+                row_removable_for_record =
+                  resolve_row_removable(options[:row_removable], object)
+
+                if row_removable_for_record
+                  formnestic_row_removing_content_tag(
+                    :table
+                  )
+                else
+                  template.content_tag(
+                    :td,
+                    '',
+                    class: \
+                      formnestic_row_removing_cell_container_div_class(:table)
+                  )
+                end
               else
                 ''
               end
             )
           ].join.html_safe, html_options
         )
+      end
+
+      def resolve_row_removable(row_removable, record)
+        return row_removable if [true, false].index(row_removable)
+
+        row_removable.call(record) if row_removable.is_a?(Proc)
+
+        false
       end
 
       def formnestic_legend_for_list_form

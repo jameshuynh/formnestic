@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable MethodLength, Documentation, ModuleLength, AbcSize
 module Formnestic
   module FormBuilder
@@ -20,7 +22,7 @@ module Formnestic
           }
         )]
 
-        if options[:row_addable]
+        if resolve_row_addable(options[:row_addable])
           contents.push(
             formnestic_add_new_record_button_row_for_table(
               record_or_name_or_array, *args, &block
@@ -58,7 +60,16 @@ module Formnestic
                             :row_removable,
                             :new_record_link_label,
                             :table_headers
-        ))
+                          ))
+      end
+
+      def resolve_row_addable(row_addable)
+        return row_addable if [true, false].index(row_addable)
+        return true if row_addable.nil?
+
+        return row_addable.call if row_addable.is_a?(Proc)
+
+        true
       end
 
       def formnestic_add_table_headers_form_attributes
@@ -72,6 +83,7 @@ module Formnestic
             return if @table_headers.detect do |x|
               x[:attr] == column_name
             end.present?
+
             @table_headers.push(
               attr: column_name,
               class:
@@ -130,7 +142,7 @@ module Formnestic
             )
           )
         end
-        if row_removable
+        if row_removable != false
           tr_content_arr.push(
             template.content_tag(
               :th, '', class: 'formnestic-minus-thead'
@@ -188,6 +200,14 @@ module Formnestic
         else
           "Column #{position}"
         end
+      end
+    end
+
+    def resolve_row_removable(row_removable, record)
+      if row_removable.is_a?(Proc)
+        row_removable.call(record)
+      else
+        row_removable
       end
     end
   end
