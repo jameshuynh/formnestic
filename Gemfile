@@ -19,7 +19,7 @@ group :development, :test do
   gem 'tzinfo'
   gem 'watchr'
 
-  gem 'nokogiri', '~> 1.10'
+  gem 'nokogiri', '~> 1.11'
 end
 
 group :test do
