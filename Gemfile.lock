@@ -35,7 +35,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     formtastic (2.2.1)
       actionpack (>= 3.0)
-    git (1.6.0)
+    git (1.11.0)
       rchardet (~> 1.8)
     github_api (0.18.2)
       addressable (~> 2.4)
