@@ -131,7 +131,7 @@ GEM
     thread_safe (0.3.6)
     tilt (1.4.1)
     tins (1.3.0)
-    tzinfo (1.2.1)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     watchr (0.7)
 
